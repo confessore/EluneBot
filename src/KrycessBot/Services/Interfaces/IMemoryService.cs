@@ -7,5 +7,6 @@ namespace KrycessBot.Services.Interfaces
     {
         Task<bool> IsInGameAsync();
         Task<WoWClass> ClassAsync();
+        Task<ulong> GetLocalPlayerGuid();
     }
 }

@@ -20,5 +20,8 @@ namespace KrycessBot.Services
 
         public Task<WoWClass> ClassAsync() =>
             Task.FromResult((WoWClass)processSharp.Memory.Read<byte>(Offsets.LocalPlayer.Class));
+
+        public Task<ulong> GetLocalPlayerGuid() =>
+            Task.FromResult((ulong)Functions.GetLocalPlayerGuid());
     }
 }

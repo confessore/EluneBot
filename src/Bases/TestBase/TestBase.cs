@@ -32,7 +32,7 @@ namespace TestBase
         {
             _ = System.Threading.Tasks.Task.Run(async () =>
             {
-                var tmp = await memoryService.ClassAsync();
+                var tmp = await memoryService.GetLocalPlayerGuid();
                 File.WriteAllText("lol", tmp.ToString());
             });
         }
