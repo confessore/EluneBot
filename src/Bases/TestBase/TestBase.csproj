@@ -45,5 +45,11 @@
     <Compile Include="TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\KrycessBot\KrycessBot.csproj">
+      <Project>{4748c52e-1ae5-4e99-addd-ca38a650313a}</Project>
+      <Name>KrycessBot</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
