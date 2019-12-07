@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace KrycessBot.Statics
 {
-    internal static class Paths
+    public static class Paths
     {
         public static Assembly Assembly = Assembly.GetExecutingAssembly();
 
@@ -15,6 +15,9 @@ namespace KrycessBot.Statics
         public static string Loader = $"{Assembly.JumpUp(1)}\\{Strings.Loader}";
 
         public static string Bases = $"{Assembly.JumpUp(1)}\\{Strings.Bases}";
+        public static string Logs = $"{Assembly.JumpUp(1)}\\{Strings.Logs}";
         public static string Plugins = $"{Assembly.JumpUp(1)}\\{Strings.Plugins}";
+
+        public static string GeneralLog = $"{Logs}\\{Strings.GeneralLog}";
     }
 }

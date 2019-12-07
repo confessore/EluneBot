@@ -1,4 +1,6 @@
-﻿using KrycessBot.Interfaces;
+﻿using KrycessBot.Game;
+using KrycessBot.Game.Interfaces;
+using KrycessBot.Interfaces;
 using KrycessBot.Services;
 using KrycessBot.Services.Interfaces;
 using KrycessBot.Statics;
@@ -22,11 +24,15 @@ namespace KrycessBot.ViewModels
 {
     internal class MainViewModel : BaseViewModel
     {
+        readonly ILoggingService loggingService;
+        readonly IObjectManager objectManager;
         readonly IMemoryService memoryService;
 
         public MainViewModel()
         {
             Services = ConfigureServicesAsync().GetAwaiter().GetResult();
+            loggingService = Services.GetRequiredService<ILoggingService>();
+            objectManager = Services.GetRequiredService<IObjectManager>();
             memoryService = Services.GetRequiredService<IMemoryService>();
             ReloadBasesAsync();
             ReloadBasesAsyncCommand = new AsyncCommand(ReloadBasesAsync);
@@ -100,6 +106,8 @@ namespace KrycessBot.ViewModels
                 catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load(File.ReadAllBytes(file))));
             }
             var container = new CompositionContainer(catalog);
+            container.ComposeExportedValue(loggingService);
+            container.ComposeExportedValue(objectManager);
             container.ComposeExportedValue(memoryService);
             container.ComposeParts(this);
             if (AvailableBases.Count > 0)
@@ -143,8 +151,10 @@ namespace KrycessBot.ViewModels
             return Task.FromResult<IServiceProvider>(
                 new ServiceCollection()
                 .AddSingleton(new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local))
+                .AddSingleton<ILoggingService, LoggingService>()
+                .AddSingleton<IObjectManager, ObjectManager>()
                 .AddSingleton<IMemoryService, MemoryService>()
-                .BuildServiceProvider());
+                .BuildServiceProvider()); ;
         }
     }
 }

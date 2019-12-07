@@ -17,6 +17,9 @@ namespace KrycessBot.Statics
         public const string Loader = "KrycessBot.Loader.dll";
 
         public const string Bases = "Bases";
+        public const string Logs = "Logs";
         public const string Plugins = "Plugins";
+
+        public const string GeneralLog = "GeneralLog.txt";
     }
 }

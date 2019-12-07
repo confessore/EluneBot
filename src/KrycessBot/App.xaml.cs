@@ -59,6 +59,7 @@ namespace KrycessBot
             Paths.Injector.CheckFile(KrycessBot.Properties.Resources.KrycessBot_Injector);
             Paths.Loader.CheckFile(KrycessBot.Properties.Resources.KrycessBot_Loader);
             Paths.Bases.CheckDirectory();
+            Paths.Logs.CheckDirectory();
             Paths.Plugins.CheckDirectory();
             return Task.CompletedTask;
         }

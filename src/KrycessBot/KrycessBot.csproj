@@ -114,7 +114,9 @@
     <Compile Include="Game\ObjectManager.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Interfaces\IClass.cs" />
+    <Compile Include="Services\Interfaces\ILoggingService.cs" />
     <Compile Include="Services\Interfaces\IMemoryService.cs" />
+    <Compile Include="Services\LoggingService.cs" />
     <Compile Include="Services\MemoryService.cs" />
     <Compile Include="Statics\Offsets.cs" />
     <Compile Include="Statics\Functions.cs" />

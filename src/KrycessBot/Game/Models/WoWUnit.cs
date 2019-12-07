@@ -5,7 +5,7 @@ namespace KrycessBot.Game.Models
 {
     public class WoWUnit : WoWObject
     {
-        public WoWUnit(long guid, IntPtr pointer, WoWObjectType type)
+        public WoWUnit(ulong guid, IntPtr pointer, WoWObjectType type)
             : base(guid, pointer, type) { }
     }
 }

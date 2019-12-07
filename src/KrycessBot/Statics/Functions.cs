@@ -6,29 +6,24 @@ namespace KrycessBot.Statics
 {
     internal static class Functions
     {
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
         delegate IntPtr GetLocalPlayerGuidDelegate();
         public static IntPtr GetLocalPlayerGuid() =>
             Marshal.GetDelegateForFunctionPointer<GetLocalPlayerGuidDelegate>(Offsets.Functions.ClntObjMgrGetActivePlayer).Invoke();
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
         delegate IntPtr SelectCharacterDelegate();
         public static IntPtr SelectCharacter() =>
             Marshal.GetDelegateForFunctionPointer<SelectCharacterDelegate>(Offsets.Functions.SelectCharacter).Invoke();
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        delegate IntPtr CastOrUseAtPositionDelegate(ref XYZ position);
+        delegate IntPtr CastOrUseAtPositionDelegate(XYZ position);
         public static IntPtr CastOrUseAtPosition(XYZ xyz) =>
-            Marshal.GetDelegateForFunctionPointer<CastOrUseAtPositionDelegate>(Offsets.Functions.CastOrUseAtPosition).Invoke(ref xyz);
+            Marshal.GetDelegateForFunctionPointer<CastOrUseAtPositionDelegate>(Offsets.Functions.CastOrUseAtPosition).Invoke(xyz);
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        delegate IntPtr GetPointerForGuidDelegate();
-        public static IntPtr GetPointerForGuid(long guid) =>
-            Marshal.GetDelegateForFunctionPointer<GetPointerForGuidDelegate>(Offsets.Functions.GetPointerForGuid).Invoke();
+        delegate IntPtr GetPointerForGuidDelegate(ulong guid);
+        public static IntPtr GetPointerForGuid(ulong guid) =>
+            Marshal.GetDelegateForFunctionPointer<GetPointerForGuidDelegate>(Offsets.Functions.GetPointerForGuid).Invoke(guid);
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        delegate IntPtr EnumerateVisibleObjectsDelegate();
+        delegate IntPtr EnumerateVisibleObjectsDelegate(IntPtr callback, int filter);
         public static IntPtr EnumerateVisibleObjects(IntPtr callback, int filter) =>
-            Marshal.GetDelegateForFunctionPointer<EnumerateVisibleObjectsDelegate>(Offsets.Functions.EnumerateVisibleObjects).Invoke();
+            Marshal.GetDelegateForFunctionPointer<EnumerateVisibleObjectsDelegate>(Offsets.Functions.EnumerateVisibleObjects).Invoke(callback, filter);
     }
 }

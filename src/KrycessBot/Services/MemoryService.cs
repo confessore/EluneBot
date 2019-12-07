@@ -11,18 +11,23 @@ using System.Threading.Tasks;
 
 namespace KrycessBot.Services
 {
-    internal sealed class MemoryService : IMemoryService
+    public sealed class MemoryService : IMemoryService
     {
         readonly ProcessSharp processSharp;
-        //readonly IObjectManager objectManager;
+        readonly ILoggingService loggingService;
+        readonly IObjectManager objectManager;
 
         public MemoryService(
-            ProcessSharp processSharp)
-        //IObjectManager objectManager)
+            ProcessSharp processSharp,
+            ILoggingService loggingService,
+            IObjectManager objectManager)
         {
             this.processSharp = processSharp;
-            //this.objectManager = objectManager;
+            this.loggingService = loggingService;
+            this.objectManager = objectManager;
         }
+
+        public int MainThreadId { get; set; }
 
         /// <summary>
         /// checks to see if the player is logged into the game world
@@ -42,8 +47,8 @@ namespace KrycessBot.Services
         /// gets the player's guid
         /// </summary>
         /// <returns>Task<long></returns>
-        public Task<long> GetLocalPlayerGuidAsync() =>
-            Task.FromResult((long)Functions.GetLocalPlayerGuid());
+        public Task<ulong> GetLocalPlayerGuidAsync() =>
+                Task.FromResult((ulong)Functions.GetLocalPlayerGuid());
 
         /// <summary>
         /// selects a character at the character selection screen
@@ -82,12 +87,8 @@ namespace KrycessBot.Services
         /// gets the base of the guid system (object manager)
         /// </summary>
         /// <returns>Task<IntPtr></returns>
-        public async Task<IntPtr> GetPointerforGuidAsync(long guid)
-        {
-            if (await IsInGameAsync())
-                return await Task.FromResult(Functions.GetPointerForGuid(guid));
-            return await Task.FromResult(IntPtr.Zero);
-        }
+        public Task<IntPtr> GetPointerforGuidAsync(ulong guid) =>
+            Task.FromResult(Functions.GetPointerForGuid(guid));
 
         /// <summary>
         /// enumerates the visible objects if the guid system (object manager)
@@ -95,13 +96,19 @@ namespace KrycessBot.Services
         /// <returns></returns>
         public async Task EnumerateVisibleObjects()
         {
-            if (!await IsInGameAsync()) return;
-            var guid = await GetLocalPlayerGuidAsync();
-            if (guid == 0) return;
-            var playerPointer = await GetPointerforGuidAsync(guid);
-            if (playerPointer == IntPtr.Zero) return;
-            //if (objectManager.LocalPlayer == null || playerPointer != objectManager.LocalPlayer.Pointer)
-            //    objectManager.LocalPlayer = new LocalPlayer(guid, playerPointer, WoWObjectType.OT_PLAYER);
+            if (await IsInGameAsync())
+            {
+                var guid = await GetLocalPlayerGuidAsync();
+                if (guid != 0)
+                {
+                    var playerPointer = await GetPointerforGuidAsync(guid);
+                    if (playerPointer != IntPtr.Zero)
+                    {
+                        if (objectManager.LocalPlayer == null || objectManager.LocalPlayer.Pointer != playerPointer)
+                            objectManager.LocalPlayer = new LocalPlayer(guid, playerPointer, WoWObjectType.OT_PLAYER);
+                    }
+                }
+            }
         }
     }
 }
