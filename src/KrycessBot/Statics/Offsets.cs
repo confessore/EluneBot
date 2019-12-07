@@ -6,21 +6,6 @@ namespace KrycessBot.Statics
     {
         //public static IntPtr BaseAddress = System.Diagnostics.Process.GetCurrentProcess().MainModule.BaseAddress;
 
-        /*public static class EntityManager
-        {
-            public static IntPtr Base = (IntPtr)0xCD3BC0;
-            public static int First = 0x0;
-            public static int Next = 0x0;
-            public static int Guid = 0x0;
-            public static int Type = 0x0;
-        }
-
-        public static class LocalPlayer
-        {
-            public static IntPtr Base = (IntPtr)0x1744E0;
-            public static IntPtr Scale = Functions.GetLocalPlayerBase() + 0x1820;
-        }*/
-
         public static class LocalPlayer
         {
             internal static IntPtr NameBase = (IntPtr)0xC0E230;
@@ -96,7 +81,7 @@ namespace KrycessBot.Statics
             internal static IntPtr PerformDefaultAction = (IntPtr)0x00481F60;
             internal static IntPtr CGInputControl__GetActive = (IntPtr)0x005143E0;
             internal static IntPtr CGInputControl__SetControlBit = (IntPtr)0x00515090;
-            internal static IntPtr EnumVisibleObjects = (IntPtr)0x00468380;
+            internal static IntPtr EnumerateVisibleObjects = (IntPtr)0x00468380;
             internal static IntPtr BuyVendorItem = (IntPtr)0x005E1E90;
             internal static IntPtr GetPointerForGuid = (IntPtr)0x464870;
             internal static IntPtr ClntObjMgrGetActivePlayer = (IntPtr)0x00468550;

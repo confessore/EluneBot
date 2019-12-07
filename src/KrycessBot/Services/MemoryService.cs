@@ -1,5 +1,7 @@
 ﻿using KrycessBot.Enums;
 using KrycessBot.Extensions;
+using KrycessBot.Game.Interfaces;
+using KrycessBot.Game.Models;
 using KrycessBot.Models;
 using KrycessBot.Services.Interfaces;
 using KrycessBot.Statics;
@@ -11,11 +13,15 @@ namespace KrycessBot.Services
 {
     internal sealed class MemoryService : IMemoryService
     {
-        public readonly ProcessSharp processSharp;
+        readonly ProcessSharp processSharp;
+        //readonly IObjectManager objectManager;
 
-        public MemoryService(ProcessSharp processSharp)
+        public MemoryService(
+            ProcessSharp processSharp)
+        //IObjectManager objectManager)
         {
             this.processSharp = processSharp;
+            //this.objectManager = objectManager;
         }
 
         /// <summary>
@@ -35,15 +41,15 @@ namespace KrycessBot.Services
         /// <summary>
         /// gets the player's guid
         /// </summary>
-        /// <returns>Task<long></long></returns>
-        public Task<long> GetLocalPlayerGuid() =>
+        /// <returns>Task<long></returns>
+        public Task<long> GetLocalPlayerGuidAsync() =>
             Task.FromResult((long)Functions.GetLocalPlayerGuid());
 
         /// <summary>
         /// selects a character at the character selection screen
         /// </summary>
         /// <returns>Task</returns>
-        public Task SelectCharacter() =>
+        public Task SelectCharacterAsync() =>
             Task.FromResult(Functions.SelectCharacter());
 
         /// <summary>
@@ -53,7 +59,7 @@ namespace KrycessBot.Services
         /// <param name="location"></param>
         /// <param name="rank"></param>
         /// <returns>Task</returns>
-        public Task CastAtPosition(string spell, Location location, int rank = -1)
+        public Task CastAtPositionAsync(string spell, Location location, int rank = -1)
         {
             Functions.CastOrUseAtPosition(location.ToStruct());
             return Task.CompletedTask;
@@ -66,21 +72,36 @@ namespace KrycessBot.Services
         /// <param name="location"></param>
         /// <param name="rank"></param>
         /// <returns>Task</returns>
-        public Task UseAtPosition(string spell, Location location,int rank = -1)
+        public Task UseAtPositionAsync(string spell, Location location, int rank = -1)
         {
             Functions.CastOrUseAtPosition(location.ToStruct());
             return Task.CompletedTask;
         }
 
         /// <summary>
-        /// gets the base of the guid system (entity | object manager)
+        /// gets the base of the guid system (object manager)
         /// </summary>
-        /// <returns>Task<IntPtr></IntPtr></returns>
-        internal async Task<IntPtr> GetPointerforGuid()
+        /// <returns>Task<IntPtr></returns>
+        public async Task<IntPtr> GetPointerforGuidAsync(long guid)
         {
             if (await IsInGameAsync())
-                return await Task.FromResult(Functions.GetPointerForGuid());
+                return await Task.FromResult(Functions.GetPointerForGuid(guid));
             return await Task.FromResult(IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// enumerates the visible objects if the guid system (object manager)
+        /// </summary>
+        /// <returns></returns>
+        public async Task EnumerateVisibleObjects()
+        {
+            if (!await IsInGameAsync()) return;
+            var guid = await GetLocalPlayerGuidAsync();
+            if (guid == 0) return;
+            var playerPointer = await GetPointerforGuidAsync(guid);
+            if (playerPointer == IntPtr.Zero) return;
+            //if (objectManager.LocalPlayer == null || playerPointer != objectManager.LocalPlayer.Pointer)
+            //    objectManager.LocalPlayer = new LocalPlayer(guid, playerPointer, WoWObjectType.OT_PLAYER);
         }
     }
 }

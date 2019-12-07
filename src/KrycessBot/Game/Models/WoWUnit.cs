@@ -1,11 +1,11 @@
 ﻿using KrycessBot.Enums;
 using System;
 
-namespace KrycessBot.Game.Entities
+namespace KrycessBot.Game.Models
 {
     public class WoWUnit : WoWObject
     {
-        public WoWUnit(ulong guid, IntPtr pointer, WoWObjectType type)
+        public WoWUnit(long guid, IntPtr pointer, WoWObjectType type)
             : base(guid, pointer, type) { }
     }
 }

@@ -23,15 +23,12 @@ namespace KrycessBot.Statics
 
         [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
         delegate IntPtr GetPointerForGuidDelegate();
-        public static IntPtr GetPointerForGuid() =>
-        Marshal.GetDelegateForFunctionPointer<GetPointerForGuidDelegate>(Offsets.Functions.GetPointerForGuid).Invoke();
+        public static IntPtr GetPointerForGuid(long guid) =>
+            Marshal.GetDelegateForFunctionPointer<GetPointerForGuidDelegate>(Offsets.Functions.GetPointerForGuid).Invoke();
 
-        /*delegate IntPtr GetLocalPlayerBaseDelegate();
-        public static IntPtr GetLocalPlayerBase() =>
-            Marshal.GetDelegateForFunctionPointer<GetLocalPlayerBaseDelegate>(Offsets.LocalPlayer.Base).Invoke();
-
-        delegate IntPtr GetEntityManagerBaseDelegate();
-        public static IntPtr GetEntityManagerBase() =>
-            Marshal.GetDelegateForFunctionPointer<GetEntityManagerBaseDelegate>(Offsets.EntityManager.Base).Invoke();*/
+        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
+        delegate IntPtr EnumerateVisibleObjectsDelegate();
+        public static IntPtr EnumerateVisibleObjects(IntPtr callback, int filter) =>
+            Marshal.GetDelegateForFunctionPointer<EnumerateVisibleObjectsDelegate>(Offsets.Functions.EnumerateVisibleObjects).Invoke();
     }
 }
