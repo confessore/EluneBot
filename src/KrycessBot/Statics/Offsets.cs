@@ -58,7 +58,7 @@ namespace KrycessBot.Statics
         internal static class Functions
         {
             internal static IntPtr SelectCharacter = (IntPtr)0x472740;
-            internal static IntPtr CastAtPos = (IntPtr)0x6E60F0;
+            internal static IntPtr CastOrUseAtPosition = (IntPtr)0x6E60F0;
             internal static IntPtr EnterWorld = (IntPtr)0x0046B500;
 
             internal static IntPtr GetCreatureRank = (IntPtr)0x00605620;
@@ -98,7 +98,7 @@ namespace KrycessBot.Statics
             internal static IntPtr CGInputControl__SetControlBit = (IntPtr)0x00515090;
             internal static IntPtr EnumVisibleObjects = (IntPtr)0x00468380;
             internal static IntPtr BuyVendorItem = (IntPtr)0x005E1E90;
-            internal static IntPtr GetPtrForGuid = (IntPtr)0x464870;
+            internal static IntPtr GetPointerForGuid = (IntPtr)0x464870;
             internal static IntPtr ClntObjMgrGetActivePlayer = (IntPtr)0x00468550;
             internal static IntPtr ClntObjMgrGetMapId = (IntPtr)0x00468580;
             internal static IntPtr NetClientSend = (IntPtr)0x005379A0;

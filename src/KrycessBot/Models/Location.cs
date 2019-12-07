@@ -1,4 +1,6 @@
-﻿namespace KrycessBot.Models
+﻿using KrycessBot.Structs;
+
+namespace KrycessBot.Models
 {
     public class Location
     {

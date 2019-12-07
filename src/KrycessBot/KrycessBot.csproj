@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Enums\WoWClass.cs" />
     <Compile Include="Enums\WoWObjectType.cs" />
+    <Compile Include="Extensions\LocationExtensions.cs" />
     <Compile Include="Game\Entities\WoWObject.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Interfaces\IClass.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Game\Entities\LocalPlayer.cs" />
     <Compile Include="Game\Entities\WoWUnit.cs" />
     <Compile Include="Game\EntityManager.cs" />
+    <Compile Include="Structs\XYZ.cs" />
     <Compile Include="Utilities\AsyncCommand.cs" />
     <Compile Include="Utilities\Interfaces\IAsyncCommand.cs" />
     <Compile Include="ViewModels\Abstractions\BaseViewModel.cs" />
