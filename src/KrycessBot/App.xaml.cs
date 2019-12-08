@@ -49,7 +49,7 @@ namespace KrycessBot
             }
             catch (Exception e)
             {
-                await QuitWithMessageAsync(e.Message);
+                await QuitWithMessageAsync(e.InnerException.Message);
             }
         }
 

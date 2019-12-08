@@ -22,8 +22,8 @@ namespace KrycessBot.Statics
         public static IntPtr GetPointerForGuid(ulong guid) =>
             Marshal.GetDelegateForFunctionPointer<GetPointerForGuidDelegate>(Offsets.Functions.GetPointerForGuid).Invoke(guid);
 
-        delegate IntPtr EnumerateVisibleObjectsDelegate(IntPtr callback, int filter);
-        public static IntPtr EnumerateVisibleObjects(IntPtr callback, int filter) =>
+        delegate int EnumerateVisibleObjectsDelegate(IntPtr callback, int filter);
+        public static int EnumerateVisibleObjects(IntPtr callback, int filter) =>
             Marshal.GetDelegateForFunctionPointer<EnumerateVisibleObjectsDelegate>(Offsets.Functions.EnumerateVisibleObjects).Invoke(callback, filter);
     }
 }

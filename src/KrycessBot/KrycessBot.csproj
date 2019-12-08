@@ -110,6 +110,7 @@
     <Compile Include="Enums\WoWObjectType.cs" />
     <Compile Include="Extensions\LocationExtensions.cs" />
     <Compile Include="Game\Interfaces\IObjectManager.cs" />
+    <Compile Include="Game\Models\WoWGameObject.cs" />
     <Compile Include="Game\Models\WoWObject.cs" />
     <Compile Include="Game\ObjectManager.cs" />
     <Compile Include="Models\Location.cs" />

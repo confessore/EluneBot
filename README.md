@@ -8,7 +8,8 @@ Contact me on Discord!
 **You can donate a number of ways**
 
 * Basic Attention Token
-	* Click the *Tip* button anywhere on my GitHub profile while you are using the *Brave Browser*
+	* Tip: Click the *Tip* button anywhere on my GitHub profile while you are using the *Brave Browser*
+	* Address: 0x8834F5fa5138B895D123133AfDE92B106000C203
 * XRP (Ripple Protocol)
 	* Address: rw2ciyaNshpHe7bCHo4bRWq6pqqynnWKQg
 	* Tag: 1713488011

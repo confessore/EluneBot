@@ -7,6 +7,8 @@ using KrycessBot.Services.Interfaces;
 using KrycessBot.Statics;
 using Process.NET;
 using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace KrycessBot.Services
@@ -14,20 +16,21 @@ namespace KrycessBot.Services
     public sealed class MemoryService : IMemoryService
     {
         readonly ProcessSharp processSharp;
-        readonly ILoggingService loggingService;
         readonly IObjectManager objectManager;
 
         public MemoryService(
             ProcessSharp processSharp,
-            ILoggingService loggingService,
             IObjectManager objectManager)
         {
             this.processSharp = processSharp;
-            this.loggingService = loggingService;
             this.objectManager = objectManager;
+            enumerateVisibleObjectsCallbackDelegate = EnumerateVisibleObjectsCallback;
+            enumerateVisibleObjectsCallbackPointer = Marshal.GetFunctionPointerForDelegate(enumerateVisibleObjectsCallbackDelegate);
         }
 
-        public int MainThreadId { get; set; }
+        delegate int EnumerateVisibleObjectsCallbackDelegate(int filter, ulong guid);
+        readonly EnumerateVisibleObjectsCallbackDelegate enumerateVisibleObjectsCallbackDelegate;
+        readonly IntPtr enumerateVisibleObjectsCallbackPointer;
 
         /// <summary>
         /// checks to see if the player is logged into the game world
@@ -91,10 +94,18 @@ namespace KrycessBot.Services
             Task.FromResult(Functions.GetPointerForGuid(guid));
 
         /// <summary>
+        /// gets the object type from the pointer to the object
+        /// </summary>
+        /// <param name="pointer"></param>
+        /// <returns>Task<WoWObjectType></returns>
+        public Task<WoWObjectType> GetWoWObjectType(IntPtr pointer) =>
+            Task.FromResult((WoWObjectType)processSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
+
+        /// <summary>
         /// enumerates the visible objects if the guid system (object manager)
         /// </summary>
         /// <returns></returns>
-        public async Task EnumerateVisibleObjects()
+        public async Task EnumerateVisibleObjectsAsync()
         {
             if (await IsInGameAsync())
             {
@@ -108,7 +119,48 @@ namespace KrycessBot.Services
                             objectManager.LocalPlayer = new LocalPlayer(guid, playerPointer, WoWObjectType.OT_PLAYER);
                     }
                 }
+                foreach (var @object in objectManager.Objects.Values)
+                    @object.CanRemove = true;
+                Functions.EnumerateVisibleObjects(enumerateVisibleObjectsCallbackPointer, 0);
+                foreach (var kvp in objectManager.Objects.Where(p => p.Value.CanRemove).ToList())
+                    objectManager.Objects.Remove(kvp.Key);
+                objectManager.FinalObjects = objectManager.Objects.Values.ToList();
             }
+        }
+
+        /// <summary>
+        /// the callback for the enumerate visible objects function
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        int EnumerateVisibleObjectsCallback(int filter, ulong guid)
+        {
+            if (guid == 0) return 0;
+            var pointer = GetPointerforGuidAsync(guid).GetAwaiter().GetResult();
+            var type = GetWoWObjectType(pointer).GetAwaiter().GetResult();
+            if (objectManager.Objects.ContainsKey(guid))
+            {
+                objectManager.Objects[guid].Pointer = pointer;
+                objectManager.Objects[guid].CanRemove = false;
+            }
+            switch (type)
+            {
+                case WoWObjectType.OT_CONTAINER:
+                    break;
+                case WoWObjectType.OT_GAMEOBJ:
+                    objectManager.Objects.Add(guid, new WoWGameObject(guid, pointer, type));
+                    break;
+                case WoWObjectType.OT_ITEM:
+                    break;
+                case WoWObjectType.OT_PLAYER:
+                    break;
+                case WoWObjectType.OT_UNIT:
+                    break;
+                default:
+                    break;
+            }
+            return 1;
         }
     }
 }

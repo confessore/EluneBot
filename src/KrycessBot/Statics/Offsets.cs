@@ -6,6 +6,17 @@ namespace KrycessBot.Statics
     {
         //public static IntPtr BaseAddress = System.Diagnostics.Process.GetCurrentProcess().MainModule.BaseAddress;
 
+        internal static class ObjectManager
+        {
+            internal static IntPtr CurObjGuid = (IntPtr)0x30;
+            internal static IntPtr ManagerBase = (IntPtr)0x00B41414;
+            internal static IntPtr PlayerGuid = (IntPtr)0xC0;
+            internal static IntPtr FirstObj = (IntPtr)0xAC;
+            internal static IntPtr NextObj = (IntPtr)0x3C;
+            internal static IntPtr ObjType = (IntPtr)0x14;
+            internal static int DescriptorOffset = 0x8;
+        }
+
         public static class LocalPlayer
         {
             internal static IntPtr NameBase = (IntPtr)0xC0E230;

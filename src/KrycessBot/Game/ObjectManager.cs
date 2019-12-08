@@ -6,7 +6,9 @@ namespace KrycessBot.Game
 {
     public sealed class ObjectManager : IObjectManager
     {
+        public Dictionary<ulong, WoWObject> Objects { get; set; } = new Dictionary<ulong, WoWObject>();
+        public List<WoWObject> FinalObjects { get; set; } = new List<WoWObject>();
         public LocalPlayer LocalPlayer { get; set; }
-        readonly Dictionary<ulong, WoWObject> WoWObjectsobjects = new Dictionary<ulong, WoWObject>();
+        
     }
 }
