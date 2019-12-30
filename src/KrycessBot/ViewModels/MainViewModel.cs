@@ -154,7 +154,7 @@ namespace KrycessBot.ViewModels
                 .AddSingleton<ILoggingService, LoggingService>()
                 .AddSingleton<IObjectManager, ObjectManager>()
                 .AddSingleton<IMemoryService, MemoryService>()
-                .BuildServiceProvider()); ;
+                .BuildServiceProvider());
         }
     }
 }

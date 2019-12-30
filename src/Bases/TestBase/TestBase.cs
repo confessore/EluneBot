@@ -41,9 +41,12 @@ namespace TestBase
         {
             _ = Task.Run(async () =>
             {
-                await memoryService.EnumerateVisibleObjectsAsync();
-                foreach (var obj in objectManager.FinalObjects)
-                    await loggingService.Log(Paths.GeneralLog, obj.Guid.ToString());
+                while (true)
+                {
+                    await memoryService.EnumerateVisibleObjectsAsync();
+                    foreach (var obj in objectManager.FinalObjects)
+                        await loggingService.Log(Paths.GeneralLog, obj.Guid.ToString());
+                }
             });
         }
 

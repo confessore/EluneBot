@@ -8,13 +8,13 @@ namespace KrycessBot.Statics
 
         public static string ExecutingName = Assembly.GetExecutingAssembly().GetName().Name;
         public static string ExecutingVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
         public static string EntryLocation = Assembly.GetExecutingAssembly().Location;
 
         public const string Settings = "Settings.json";
 
         public const string Injector = "KrycessBot.Injector.dll";
         public const string Loader = "KrycessBot.Loader.dll";
+        public const string FastCall = "KrycessBot.FastCall.dll";
 
         public const string Bases = "Bases";
         public const string Logs = "Logs";

@@ -28,7 +28,7 @@ namespace KrycessBot.Services
             enumerateVisibleObjectsCallbackPointer = Marshal.GetFunctionPointerForDelegate(enumerateVisibleObjectsCallbackDelegate);
         }
 
-        delegate int EnumerateVisibleObjectsCallbackDelegate(int filter, ulong guid);
+        delegate int EnumerateVisibleObjectsCallbackDelegate(ulong guid, int filter);
         readonly EnumerateVisibleObjectsCallbackDelegate enumerateVisibleObjectsCallbackDelegate;
         readonly IntPtr enumerateVisibleObjectsCallbackPointer;
 
@@ -121,7 +121,7 @@ namespace KrycessBot.Services
                 }
                 foreach (var @object in objectManager.Objects.Values)
                     @object.CanRemove = true;
-                Functions.EnumerateVisibleObjects(enumerateVisibleObjectsCallbackPointer, 0);
+                Functions.EnumerateVisibleObjects(enumerateVisibleObjectsCallbackPointer, -1);
                 foreach (var kvp in objectManager.Objects.Where(p => p.Value.CanRemove).ToList())
                     objectManager.Objects.Remove(kvp.Key);
                 objectManager.FinalObjects = objectManager.Objects.Values.ToList();
@@ -134,7 +134,7 @@ namespace KrycessBot.Services
         /// <param name="filter"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        int EnumerateVisibleObjectsCallback(int filter, ulong guid)
+        public int EnumerateVisibleObjectsCallback(ulong guid, int filter)
         {
             if (guid == 0) return 0;
             var pointer = GetPointerforGuidAsync(guid).GetAwaiter().GetResult();
@@ -156,6 +156,7 @@ namespace KrycessBot.Services
                 case WoWObjectType.OT_PLAYER:
                     break;
                 case WoWObjectType.OT_UNIT:
+                    objectManager.Objects.Add(guid, new WoWUnit(guid, pointer, type));
                     break;
                 default:
                     break;

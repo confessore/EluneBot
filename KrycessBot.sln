@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrycessBot", "src\KrycessBot\KrycessBot.csproj", "{4748C52E-1AE5-4E99-ADDD-CA38A650313A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KrycessBot.FastCall", "src\KrycessBot.FastCall\KrycessBot.FastCall.vcxproj", "{9584E5FC-4095-45BA-AA15-D21B3BD3250D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,16 @@ Global
 		{4748C52E-1AE5-4E99-ADDD-CA38A650313A}.Release|x64.Build.0 = Release|Any CPU
 		{4748C52E-1AE5-4E99-ADDD-CA38A650313A}.Release|x86.ActiveCfg = Release|Any CPU
 		{4748C52E-1AE5-4E99-ADDD-CA38A650313A}.Release|x86.Build.0 = Release|Any CPU
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Debug|x64.ActiveCfg = Debug|x64
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Debug|x64.Build.0 = Debug|x64
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Debug|x86.ActiveCfg = Debug|Win32
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Debug|x86.Build.0 = Debug|Win32
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Release|Any CPU.ActiveCfg = Release|Win32
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Release|x64.ActiveCfg = Release|x64
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Release|x64.Build.0 = Release|x64
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Release|x86.ActiveCfg = Release|Win32
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +99,7 @@ Global
 		{03380455-FA26-4905-8446-330A77AD5AB6} = {883511E5-6494-47BC-89C8-4D00091B84FE}
 		{B72C0A44-C227-435E-B4D3-026FAD84E965} = {883511E5-6494-47BC-89C8-4D00091B84FE}
 		{4748C52E-1AE5-4E99-ADDD-CA38A650313A} = {883511E5-6494-47BC-89C8-4D00091B84FE}
+		{9584E5FC-4095-45BA-AA15-D21B3BD3250D} = {883511E5-6494-47BC-89C8-4D00091B84FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF0C1AD7-5CD8-472F-AC4B-67999A16CBF7}
