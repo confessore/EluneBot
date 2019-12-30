@@ -85,7 +85,7 @@ namespace EluneBot.Services
         /// </summary>
         /// <param name="pointer"></param>
         /// <returns>Task<WoWObjectType></returns>
-        public Task<WoWObjectType> GetWoWObjectType(IntPtr pointer) =>
+        public Task<WoWObjectType> GetWoWObjectTypeAsync(IntPtr pointer) =>
             Task.FromResult((WoWObjectType)processSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
 
         /// <summary>

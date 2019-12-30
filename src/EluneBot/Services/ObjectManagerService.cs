@@ -76,7 +76,7 @@ namespace EluneBot.Services
         {
             if (guid == 0) return 0;
             var pointer = memory.GetPointerforGuidAsync(guid).GetAwaiter().GetResult();
-            var type = memory.GetWoWObjectType(pointer).GetAwaiter().GetResult();
+            var type = memory.GetWoWObjectTypeAsync(pointer).GetAwaiter().GetResult();
             if (Objects.ContainsKey(guid))
             {
                 Objects[guid].Pointer = pointer;
