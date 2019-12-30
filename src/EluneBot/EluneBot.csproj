@@ -109,11 +109,11 @@
     <Compile Include="Enums\WoWClass.cs" />
     <Compile Include="Enums\WoWObjectType.cs" />
     <Compile Include="Extensions\LocationExtensions.cs" />
-    <Compile Include="Game\Interfaces\IObjectManager.cs" />
-    <Compile Include="Game\Models\WoWGameObject.cs" />
-    <Compile Include="Game\Models\WoWItem.cs" />
-    <Compile Include="Game\Models\WoWObject.cs" />
-    <Compile Include="Game\ObjectManager.cs" />
+    <Compile Include="Services\Interfaces\IObjectManagerService.cs" />
+    <Compile Include="Models\WoWGameObject.cs" />
+    <Compile Include="Models\WoWItem.cs" />
+    <Compile Include="Models\WoWObject.cs" />
+    <Compile Include="Services\ObjectManagerService.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Interfaces\IClass.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -121,9 +121,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Interfaces\ILoggingService.cs" />
+    <Compile Include="Services\Interfaces\ILoggerService.cs" />
     <Compile Include="Services\Interfaces\IMemoryService.cs" />
-    <Compile Include="Services\LoggingService.cs" />
+    <Compile Include="Services\LoggerService.cs" />
     <Compile Include="Services\MemoryService.cs" />
     <Compile Include="Statics\Offsets.cs" />
     <Compile Include="Statics\Functions.cs" />
@@ -134,8 +134,8 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Interfaces\IBase.cs" />
     <Compile Include="Interfaces\IPlugin.cs" />
-    <Compile Include="Game\Models\LocalPlayer.cs" />
-    <Compile Include="Game\Models\WoWUnit.cs" />
+    <Compile Include="Models\LocalPlayer.cs" />
+    <Compile Include="Models\WoWUnit.cs" />
     <Compile Include="Structs\XYZ.cs" />
     <Compile Include="Utilities\AsyncCommand.cs" />
     <Compile Include="Utilities\Interfaces\IAsyncCommand.cs" />

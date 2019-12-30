@@ -1,9 +1,9 @@
-﻿using EluneBot.Game.Models;
+﻿using EluneBot.Models;
 using System.Collections.Generic;
 
-namespace EluneBot.Game.Interfaces
+namespace EluneBot.Services.Interfaces
 {
-    public interface IObjectManager
+    public interface IObjectManagerService
     {
         Dictionary<ulong, WoWObject> Objects { get; set; }
         List<WoWObject> FinalObjects { get; set; }

@@ -1,5 +1,4 @@
-﻿using EluneBot.Game.Interfaces;
-using EluneBot.Interfaces;
+﻿using EluneBot.Interfaces;
 using EluneBot.Services.Interfaces;
 using EluneBot.Statics;
 using System;
@@ -11,19 +10,16 @@ namespace TestBase
     [Export(typeof(IBase))]
     public class TestBase : IBase
     {
-        readonly ILoggingService loggingService;
-        readonly IObjectManager objectManager;
-        readonly IMemoryService memoryService;
+        readonly ILoggerService loggingService;
+        readonly IObjectManagerService objectManager;
 
         [ImportingConstructor]
         public TestBase(
-            [Import]ILoggingService loggingService,
-            [Import]IObjectManager objectManager,
-            [Import]IMemoryService memoryService)
+            [Import]ILoggerService loggingService,
+            [Import]IObjectManagerService objectManager)
         {
             this.loggingService = loggingService;
             this.objectManager = objectManager;
-            this.memoryService = memoryService;
         }
 
         public string Name => "TestBase";
@@ -43,7 +39,6 @@ namespace TestBase
             {
                 while (true)
                 {
-                    await memoryService.EnumerateVisibleObjectsAsync();
                     foreach (var obj in objectManager.FinalObjects)
                         await loggingService.Log(Paths.GeneralLog, obj.Guid.ToString());
                 }

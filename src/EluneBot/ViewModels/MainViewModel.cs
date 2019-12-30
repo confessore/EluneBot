@@ -1,6 +1,4 @@
-﻿using EluneBot.Game;
-using EluneBot.Game.Interfaces;
-using EluneBot.Interfaces;
+﻿using EluneBot.Interfaces;
 using EluneBot.Services;
 using EluneBot.Services.Interfaces;
 using EluneBot.Statics;
@@ -24,15 +22,15 @@ namespace EluneBot.ViewModels
 {
     internal class MainViewModel : BaseViewModel
     {
-        readonly ILoggingService loggingService;
-        readonly IObjectManager objectManager;
+        readonly ILoggerService loggingService;
+        readonly IObjectManagerService objectManager;
         readonly IMemoryService memoryService;
 
         public MainViewModel()
         {
             Services = ConfigureServicesAsync().GetAwaiter().GetResult();
-            loggingService = Services.GetRequiredService<ILoggingService>();
-            objectManager = Services.GetRequiredService<IObjectManager>();
+            loggingService = Services.GetRequiredService<ILoggerService>();
+            objectManager = Services.GetRequiredService<IObjectManagerService>();
             memoryService = Services.GetRequiredService<IMemoryService>();
             ReloadBasesAsync();
             ReloadBasesAsyncCommand = new AsyncCommand(ReloadBasesAsync);
@@ -151,8 +149,8 @@ namespace EluneBot.ViewModels
             return Task.FromResult<IServiceProvider>(
                 new ServiceCollection()
                 .AddSingleton(new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local))
-                .AddSingleton<ILoggingService, LoggingService>()
-                .AddSingleton<IObjectManager, ObjectManager>()
+                .AddSingleton<ILoggerService, LoggerService>()
+                .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IMemoryService, MemoryService>()
                 .BuildServiceProvider());
         }

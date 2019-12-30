@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EluneBot.Services
 {
-    public class LoggingService : ILoggingService
+    public class LoggerService : ILoggerService
     {
         public async Task GeneralLog(string input, bool showDate = true) =>
             await Log(Paths.GeneralLog, input, showDate);

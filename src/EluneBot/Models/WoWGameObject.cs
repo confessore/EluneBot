@@ -1,7 +1,7 @@
 ﻿using EluneBot.Enums;
 using System;
 
-namespace EluneBot.Game.Models
+namespace EluneBot.Models
 {
     public class WoWGameObject : WoWObject
     {

@@ -2,7 +2,7 @@
 
 namespace EluneBot.Services.Interfaces
 {
-    public interface ILoggingService
+    public interface ILoggerService
     {
         Task GeneralLog(string input, bool showDate = true);
         Task GeneralLog(int input, bool showDate = true);

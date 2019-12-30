@@ -23,8 +23,7 @@ namespace EluneBot.Statics
             Marshal.GetDelegateForFunctionPointer<GetPointerForGuidDelegate>(Offsets.Functions.GetPointerForGuid).Invoke(guid);
 
         [DllImport(Strings.FastCall, EntryPoint = "EnumerateVisibleObjects")]
-        static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr ptr);
-        public static void EnumerateVisibleObjects(IntPtr callback, int filter) =>
-            EnumerateVisibleObjects(callback, filter, Offsets.Functions.EnumerateVisibleObjects);
+        public static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr ptr);
+        
     }
 }
