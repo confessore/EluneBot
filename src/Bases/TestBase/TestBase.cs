@@ -1,7 +1,7 @@
-﻿using KrycessBot.Game.Interfaces;
-using KrycessBot.Interfaces;
-using KrycessBot.Services.Interfaces;
-using KrycessBot.Statics;
+﻿using EluneBot.Game.Interfaces;
+using EluneBot.Interfaces;
+using EluneBot.Services.Interfaces;
+using EluneBot.Statics;
 using System;
 using System.ComponentModel.Composition;
 using System.Threading.Tasks;

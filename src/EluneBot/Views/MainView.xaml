@@ -1,0 +1,68 @@
+﻿<Window x:ClassModifier="internal" x:Class="EluneBot.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EluneBot.Views"
+        xmlns:vm="clr-namespace:EluneBot.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding WindowTitle}" Height="300" Width="450">
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ComboBox 
+            Grid.Row="0"
+            Grid.ColumnSpan="4"
+            IsEditable="False"
+            ItemsSource="{Binding AvailableBases, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedBase, UpdateSourceTrigger=PropertyChanged}"
+            IsSynchronizedWithCurrentItem="True">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} (V{1}) by {2}">
+                                <Binding Path="Name" />
+                                <Binding Path="Version" />
+                                <Binding Path="Author" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="Reload"
+            Command="{Binding ReloadBasesAsyncCommand}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Content="Start"
+            Command="{Binding StartBaseAsyncCommand}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="2"
+            Content="Stop"
+            Command="{Binding StopBaseAsyncCommand}" />
+        <Button
+            Grid.Row="1"
+            Grid.Column="3"
+            Content="Toggle GUI"
+            Command="{Binding ToggleGUIAsyncCommand}" />
+    </Grid>
+</Window>

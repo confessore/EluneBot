@@ -1,4 +1,4 @@
-#KrycessBot
+#EluneBot
 
 Contact me on Discord!
 **krycess#1875**
@@ -7,7 +7,7 @@ Contact me on Discord!
 
 1. Ensure that you have World of Warcraft v1.12.1 on your filesystem
 1. Download and extract the *mmaps* folder to the bot folder
-1. Execute *KrycessBot.exe*
+1. Execute *EluneBot.exe*
 1. Find and open *WoW.exe* when the dialog box requests you to do so
 1. Log into the game
 1. Choose the base that you want to use and click *Start*!

@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\KrycessBot\bin\Debug\Bases\</OutputPath>
+    <OutputPath>..\..\EluneBot\bin\Debug\Bases\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KrycessBot\KrycessBot.csproj">
+    <ProjectReference Include="..\..\EluneBot\EluneBot.csproj">
       <Project>{4748c52e-1ae5-4e99-addd-ca38a650313a}</Project>
-      <Name>KrycessBot</Name>
+      <Name>EluneBot</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
