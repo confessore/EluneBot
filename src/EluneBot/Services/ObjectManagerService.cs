@@ -31,6 +31,7 @@ namespace EluneBot.Services
             });
         }
 
+        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
         delegate int EnumerateVisibleObjectsCallbackDelegate(ulong guid, int filter);
         readonly EnumerateVisibleObjectsCallbackDelegate enumerateVisibleObjectsCallbackDelegate;
         readonly IntPtr enumerateVisibleObjectsCallbackPointer;
@@ -76,6 +77,7 @@ namespace EluneBot.Services
         {
             if (guid == 0) return 0;
             var pointer = memory.GetPointerforGuidAsync(guid).GetAwaiter().GetResult();
+            if (pointer == IntPtr.Zero) return 0;
             var type = memory.GetWoWObjectTypeAsync(pointer).GetAwaiter().GetResult();
             if (Objects.ContainsKey(guid))
             {
@@ -104,7 +106,7 @@ namespace EluneBot.Services
                 default:
                     break;
             }
-            logger.GeneralLog($"{pointer} {type}");
+            logger.GeneralLog($"{guid} {pointer} {type}");
             return 1;
         }
     }
