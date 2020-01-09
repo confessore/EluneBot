@@ -1,6 +1,7 @@
 ﻿using EluneBot.Enums;
 using EluneBot.Models;
 using EluneBot.Services.Interfaces;
+using EluneBot.Statics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,7 +52,8 @@ namespace EluneBot.Services
                 var guid = await memory.GetLocalPlayerGuidAsync();
                 if (guid != 0)
                 {
-                    var playerPointer = await memory.GetPointerforGuidAsync(guid);
+                    var playerPointer = await memory.GetPointerForGuidAsync(guid);
+                    var tmp = await memory.GetPointerForGuidAsync(185586967084269567);
                     if (playerPointer != IntPtr.Zero)
                     {
                         if (LocalPlayer == null || LocalPlayer.Pointer != playerPointer)
@@ -60,7 +62,7 @@ namespace EluneBot.Services
                 }
                 foreach (var @object in Objects.Values)
                     @object.CanRemove = true;
-                memory.EnumerateVisibleObjects(enumerateVisibleObjectsCallbackPointer, 0);
+                await memory.EnumerateVisibleObjects(enumerateVisibleObjectsCallbackPointer, -1);
                 foreach (var kvp in Objects.Where(p => p.Value.CanRemove).ToList())
                     Objects.Remove(kvp.Key);
                 FinalObjects = Objects.Values.ToList();
@@ -76,7 +78,7 @@ namespace EluneBot.Services
         public int EnumerateVisibleObjectsCallback(ulong guid, int filter)
         {
             if (guid == 0) return 0;
-            var pointer = memory.GetPointerforGuidAsync(guid).GetAwaiter().GetResult();
+            var pointer = memory.GetPointerForGuidAsync(guid).GetAwaiter().GetResult();
             if (pointer == IntPtr.Zero) return 0;
             var type = memory.GetWoWObjectTypeAsync(pointer).GetAwaiter().GetResult();
             if (Objects.ContainsKey(guid))

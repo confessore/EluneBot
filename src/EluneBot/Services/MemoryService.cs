@@ -77,7 +77,7 @@ namespace EluneBot.Services
         /// gets the base of the guid system (object manager)
         /// </summary>
         /// <returns>Task<IntPtr></returns>
-        public Task<IntPtr> GetPointerforGuidAsync(ulong guid) =>
+        public Task<IntPtr> GetPointerForGuidAsync(ulong guid) =>
             Task.FromResult(Functions.GetPointerForGuid(guid));
 
         /// <summary>
@@ -93,7 +93,10 @@ namespace EluneBot.Services
         /// </summary>
         /// <param name="callback"></param>
         /// <param name="filter"></param>
-        public void EnumerateVisibleObjects(IntPtr callback, int filter) =>
+        public Task EnumerateVisibleObjects(IntPtr callback, int filter)
+        {
             Functions.EnumerateVisibleObjects(callback, filter, Offsets.Functions.EnumerateVisibleObjects);
+            return Task.CompletedTask;
+        }
     }
 }

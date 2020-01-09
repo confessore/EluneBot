@@ -6,6 +6,7 @@ namespace EluneBot.Statics
 {
     internal static class Functions
     {
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate IntPtr GetLocalPlayerGuidDelegate();
         public static IntPtr GetLocalPlayerGuid() =>
             Marshal.GetDelegateForFunctionPointer<GetLocalPlayerGuidDelegate>(Offsets.Functions.ClntObjMgrGetActivePlayer).Invoke();
