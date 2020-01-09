@@ -1,7 +1,6 @@
 ﻿using EluneBot.Enums;
 using EluneBot.Models;
 using EluneBot.Services.Interfaces;
-using EluneBot.Statics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +32,7 @@ namespace EluneBot.Services
         }
 
         [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        delegate int EnumerateVisibleObjectsCallbackDelegate(ulong guid, int filter);
+        delegate int EnumerateVisibleObjectsCallbackDelegate(int filter, ulong guid);
         readonly EnumerateVisibleObjectsCallbackDelegate enumerateVisibleObjectsCallbackDelegate;
         readonly IntPtr enumerateVisibleObjectsCallbackPointer;
 
@@ -75,7 +74,7 @@ namespace EluneBot.Services
         /// <param name="filter"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public int EnumerateVisibleObjectsCallback(ulong guid, int filter)
+        public int EnumerateVisibleObjectsCallback(int filter, ulong guid)
         {
             if (guid == 0) return 0;
             var pointer = memory.GetPointerForGuidAsync(guid).GetAwaiter().GetResult();
@@ -86,29 +85,32 @@ namespace EluneBot.Services
                 Objects[guid].Pointer = pointer;
                 Objects[guid].CanRemove = false;
             }
-            switch (type)
+            else
             {
-                case WoWObjectType.OT_CONTAINER:
-                    break;
-                case WoWObjectType.OT_CORPSE:
-                    break;
-                case WoWObjectType.OT_GAMEOBJ:
-                    Objects.Add(guid, new WoWGameObject(guid, pointer, type));
-                    break;
-                case WoWObjectType.OT_ITEM:
-                    Objects.Add(guid, new WoWItem(guid, pointer, type));
-                    break;
-                case WoWObjectType.OT_NONE:
-                    break;
-                case WoWObjectType.OT_PLAYER:
-                    break;
-                case WoWObjectType.OT_UNIT:
-                    Objects.Add(guid, new WoWUnit(guid, pointer, type));
-                    break;
-                default:
-                    break;
+                switch (type)
+                {
+                    case WoWObjectType.OT_CONTAINER:
+                        break;
+                    case WoWObjectType.OT_CORPSE:
+                        break;
+                    case WoWObjectType.OT_GAMEOBJ:
+                        Objects.Add(guid, new WoWGameObject(guid, pointer, type));
+                        break;
+                    case WoWObjectType.OT_ITEM:
+                        Objects.Add(guid, new WoWItem(guid, pointer, type));
+                        break;
+                    case WoWObjectType.OT_NONE:
+                        break;
+                    case WoWObjectType.OT_PLAYER:
+                        break;
+                    case WoWObjectType.OT_UNIT:
+                        Objects.Add(guid, new WoWUnit(guid, pointer, type));
+                        break;
+                    default:
+                        break;
+                }
+                logger.GeneralLog($"{guid} {pointer} {type}");
             }
-            logger.GeneralLog($"{guid} {pointer} {type}");
             return 1;
         }
     }
