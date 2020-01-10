@@ -1,4 +1,5 @@
 ﻿using EluneBot.Enums;
+using EluneBot.Statics;
 using System;
 
 namespace EluneBot.Models
@@ -7,5 +8,7 @@ namespace EluneBot.Models
     {
         public WoWUnit(ulong guid, IntPtr pointer, WoWObjectType type)
             : base(guid, pointer, type) { }
+
+        public int MaxHealth => GetDescriptor<int>(Offsets.Descriptors.MaxHealth);
     }
 }

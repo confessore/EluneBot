@@ -17,6 +17,51 @@ namespace EluneBot.Statics
             internal static int DescriptorOffset = 0x8;
         }
 
+        internal static class Descriptors
+        {
+            internal static int GotLoot = 0xB4;
+
+            internal static int SummonedByGuid = 0x30;
+
+            internal static int NpcId = 0xE74;
+
+            internal static int DynamicFlags = 0x23C;
+            internal static int Flags = 0xB8;
+
+            internal static int IsChanneling = 0x240;
+            internal static int CreatedByGuid = 0x38;
+            internal static int GameObjectCreatedByGuid = 0x18;
+
+            internal static int MovementFlags = 0x9E8;
+
+            internal static int Health = 0x58;
+            internal static int MaxHealth = 0x70;
+            internal static int FactionId = 0x8C;
+            internal static int Mana = 0x5C;
+            internal static int MaxMana = 0x74;
+            internal static int Rage = 0x60;
+            internal static int Energy = 0x68;
+            internal static int TargetGuid = 0x40;
+            internal static int CorpseOwnedBy = 0x18;
+
+            internal static int ItemId = 0xC;
+            internal static int ItemDurability = 0xB8;
+            internal static int ItemMaxDurability = 0xBC;
+            internal static int ItemStackCount = 0x38;
+
+            internal static int Level = 0x88;
+
+            internal static int MountDisplayId = 0x214;
+
+            internal static int ContainerTotalSlots = 0x6c8;
+            internal static int CorpseX = 0x24;
+            internal static int CorpseY = 0x28;
+            internal static int CorpseZ = 0x2c;
+
+            internal static int NextLevelXp = 0xB34;
+            internal static int CurrentXp = 0xB30;
+        }
+
         public static class LocalPlayer
         {
             internal static IntPtr NameBase = (IntPtr)0xC0E230;

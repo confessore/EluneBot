@@ -148,7 +148,6 @@ namespace EluneBot.ViewModels
         {
             return Task.FromResult<IServiceProvider>(
                 new ServiceCollection()
-                .AddSingleton(new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local))
                 .AddSingleton<ILoggerService, LoggerService>()
                 .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IMemoryService, MemoryService>()

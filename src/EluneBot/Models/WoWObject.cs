@@ -1,4 +1,6 @@
 ﻿using EluneBot.Enums;
+using EluneBot.Services;
+using EluneBot.Statics;
 using System;
 
 namespace EluneBot.Models
@@ -18,5 +20,11 @@ namespace EluneBot.Models
         public bool CanRemove { get; internal set; }
         public string Name { get; internal set; }
         public Location Position { get; internal set; }
+
+        internal T GetDescriptor<T>(int descriptor) where T : struct
+        {
+            var pointer = MemoryService.ProcessSharp.Memory.Read<uint>(IntPtr.Add(Pointer, Offsets.ObjectManager.DescriptorOffset));
+            return MemoryService.ProcessSharp.Memory.Read<T>(new IntPtr(pointer + descriptor));
+        }
     }
 }

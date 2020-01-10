@@ -1,8 +1,8 @@
 ﻿using EluneBot.Interfaces;
 using EluneBot.Services.Interfaces;
-using EluneBot.Statics;
 using System;
 using System.ComponentModel.Composition;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TestBase
@@ -10,17 +10,20 @@ namespace TestBase
     [Export(typeof(IBase))]
     public class TestBase : IBase
     {
-        readonly ILoggerService loggingService;
+        readonly ILoggerService logger;
         readonly IObjectManagerService objectManager;
 
         [ImportingConstructor]
         public TestBase(
-            [Import]ILoggerService loggingService,
+            [Import]ILoggerService logger,
             [Import]IObjectManagerService objectManager)
         {
-            this.loggingService = loggingService;
+            this.logger = logger;
             this.objectManager = objectManager;
         }
+
+        CancellationTokenSource cts;
+        CancellationToken token;
 
         public string Name => "TestBase";
 
@@ -35,19 +38,22 @@ namespace TestBase
 
         public void Start()
         {
+            cts = new CancellationTokenSource();
+            token = cts.Token;
             _ = Task.Run(async () =>
             {
                 while (true)
                 {
-                    foreach (var obj in objectManager.FinalObjects)
-                        await loggingService.Log(Paths.GeneralLog, obj.Guid.ToString());
+                    await logger.GeneralLog(objectManager.LocalPlayer.MaxHealth);
+                    token.ThrowIfCancellationRequested();
+                    await Task.Delay(100);
                 }
-            });
+            }, token);
         }
 
         public void Stop()
         {
-
+            cts.Cancel();
         }
 
         public void ToggleGUI()

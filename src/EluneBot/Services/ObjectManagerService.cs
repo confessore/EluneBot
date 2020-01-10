@@ -1,6 +1,9 @@
 ﻿using EluneBot.Enums;
+using EluneBot.Extensions;
 using EluneBot.Models;
 using EluneBot.Services.Interfaces;
+using EluneBot.Statics;
+using Process.NET;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +42,7 @@ namespace EluneBot.Services
         public Dictionary<ulong, WoWObject> Objects { get; set; } = new Dictionary<ulong, WoWObject>();
         public List<WoWObject> FinalObjects { get; set; } = new List<WoWObject>();
         public LocalPlayer LocalPlayer { get; set; }
+        public LocalPet LocalPet { get; set; }
 
         /// <summary>
         /// enumerates the visible objects if the guid system (object manager)
@@ -102,14 +106,23 @@ namespace EluneBot.Services
                     case WoWObjectType.OT_NONE:
                         break;
                     case WoWObjectType.OT_PLAYER:
+                        Objects.Add(guid, new WoWUnit(guid, pointer, type));
                         break;
                     case WoWObjectType.OT_UNIT:
                         Objects.Add(guid, new WoWUnit(guid, pointer, type));
+                        var owner = pointer.Add(Offsets.ObjectManager.DescriptorOffset)
+                            .PointsTo()
+                            .Add(Offsets.Descriptors.SummonedByGuid)
+                            .ReadAs<ulong>();
+                        if (LocalPlayer != null && owner == LocalPlayer.Guid)
+                        {
+                            if (LocalPet != null && LocalPet.Pointer == pointer) break;
+                            LocalPet = new LocalPet(guid, pointer, type);
+                        }
                         break;
                     default:
                         break;
                 }
-                logger.GeneralLog($"{guid} {pointer} {type}");
             }
             return 1;
         }

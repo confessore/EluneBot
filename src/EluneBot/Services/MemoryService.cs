@@ -4,6 +4,7 @@ using EluneBot.Models;
 using EluneBot.Services.Interfaces;
 using EluneBot.Statics;
 using Process.NET;
+using Process.NET.Memory;
 using System;
 using System.Threading.Tasks;
 
@@ -11,27 +12,22 @@ namespace EluneBot.Services
 {
     public sealed class MemoryService : IMemoryService
     {
-        readonly ProcessSharp processSharp;
-
-        public MemoryService(
-            ProcessSharp processSharp)
-        {
-            this.processSharp = processSharp;
-        }
+        public static ProcessSharp ProcessSharp =>
+            new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local);
 
         /// <summary>
         /// checks to see if the player is logged into the game world
         /// </summary>
         /// <returns>bool</returns>
         public Task<bool> IsInGameAsync() =>
-            Task.FromResult(processSharp.Memory.Read<bool>(Offsets.LocalPlayer.IsInGame));
+            Task.FromResult(ProcessSharp.Memory.Read<bool>(Offsets.LocalPlayer.IsInGame));
 
         /// <summary>
         /// gets the player's character class
         /// </summary>
         /// <returns>WoWClass</returns>
         public Task<WoWClass> ClassAsync() =>
-            Task.FromResult((WoWClass)processSharp.Memory.Read<byte>(Offsets.LocalPlayer.Class));
+            Task.FromResult((WoWClass)ProcessSharp.Memory.Read<byte>(Offsets.LocalPlayer.Class));
 
         /// <summary>
         /// gets the player's guid
@@ -86,7 +82,7 @@ namespace EluneBot.Services
         /// <param name="pointer"></param>
         /// <returns>Task<WoWObjectType></returns>
         public Task<WoWObjectType> GetWoWObjectTypeAsync(IntPtr pointer) =>
-            Task.FromResult((WoWObjectType)processSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
+            Task.FromResult((WoWObjectType)ProcessSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
 
         /// <summary>
         /// enumerates all visible objects around the player
