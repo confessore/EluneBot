@@ -11,5 +11,8 @@ namespace EluneBot.Services.Interfaces
         LocalPet LocalPet { get; set; }
         IEnumerable<WoWUnit> Units { get; }
         IEnumerable<WoWUnit> Players { get; }
+        IEnumerable<WoWUnit> NPCs { get; }
+        IEnumerable<WoWGameObject> GameObjects { get; }
+        IEnumerable<WoWItem> Items { get; }
     }
 }

@@ -50,6 +50,15 @@ namespace EluneBot.Services
         public IEnumerable<WoWUnit> Players =>
             FinalObjects.OfType<WoWUnit>().Where(x => x.Type == WoWObjectType.OT_PLAYER);
 
+        public IEnumerable<WoWUnit> NPCs =>
+            FinalObjects.OfType<WoWUnit>().Where(x => x.Type == WoWObjectType.OT_UNIT);
+
+        public IEnumerable<WoWGameObject> GameObjects =>
+            FinalObjects.OfType<WoWGameObject>();
+
+        public IEnumerable<WoWItem> Items =>
+            FinalObjects.OfType<WoWItem>();
+
         /// <summary>
         /// enumerates the visible objects if the guid system (object manager)
         /// </summary>
