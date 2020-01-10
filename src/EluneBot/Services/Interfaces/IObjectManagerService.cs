@@ -5,8 +5,11 @@ namespace EluneBot.Services.Interfaces
 {
     public interface IObjectManagerService
     {
-        Dictionary<ulong, WoWObject> Objects { get; set; }
-        List<WoWObject> FinalObjects { get; set; }
+        IDictionary<ulong, WoWObject> Objects { get; set; }
+        IEnumerable<WoWObject> FinalObjects { get; set; }
         LocalPlayer LocalPlayer { get; set; }
+        LocalPet LocalPet { get; set; }
+        IEnumerable<WoWUnit> Units { get; }
+        IEnumerable<WoWUnit> Players { get; }
     }
 }

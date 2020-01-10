@@ -39,10 +39,16 @@ namespace EluneBot.Services
         readonly EnumerateVisibleObjectsCallbackDelegate enumerateVisibleObjectsCallbackDelegate;
         readonly IntPtr enumerateVisibleObjectsCallbackPointer;
 
-        public Dictionary<ulong, WoWObject> Objects { get; set; } = new Dictionary<ulong, WoWObject>();
-        public List<WoWObject> FinalObjects { get; set; } = new List<WoWObject>();
+        public IDictionary<ulong, WoWObject> Objects { get; set; } = new Dictionary<ulong, WoWObject>();
+        public IEnumerable<WoWObject> FinalObjects { get; set; } = new List<WoWObject>();
         public LocalPlayer LocalPlayer { get; set; }
         public LocalPet LocalPet { get; set; }
+
+        public IEnumerable<WoWUnit> Units =>
+            FinalObjects.OfType<WoWUnit>();
+
+        public IEnumerable<WoWUnit> Players =>
+            FinalObjects.OfType<WoWUnit>().Where(x => x.Type == WoWObjectType.OT_PLAYER);
 
         /// <summary>
         /// enumerates the visible objects if the guid system (object manager)
