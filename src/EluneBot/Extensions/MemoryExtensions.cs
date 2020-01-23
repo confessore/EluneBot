@@ -1,5 +1,6 @@
 ﻿using EluneBot.Services;
 using System;
+using System.Text;
 
 namespace EluneBot.Extensions
 {
@@ -32,17 +33,65 @@ namespace EluneBot.Extensions
 
         internal static T ReadAs<T>(this IntPtr value) where T : struct
         {
-            return value == IntPtr.Zero ? default(T) : MemoryService.ProcessSharp.Memory.Read<T>(value);
+            return value == IntPtr.Zero ? default : MemoryService.ProcessSharp.Memory.Read<T>(value);
         }
 
         internal static T ReadAs<T>(this int value) where T : struct
         {
-            return value == 0 ? default(T) : MemoryService.ProcessSharp.Memory.Read<T>((IntPtr)value);
+            return value == 0 ? default : MemoryService.ProcessSharp.Memory.Read<T>((IntPtr)value);
         }
 
         internal static T ReadAs<T>(this uint value) where T : struct
         {
-            return value == 0 ? default(T) : MemoryService.ProcessSharp.Memory.Read<T>((IntPtr)value);
+            return value == 0 ? default : MemoryService.ProcessSharp.Memory.Read<T>((IntPtr)value);
+        }
+
+        internal static string ReadString(this IntPtr value, int length = 512, Encoding encoding = null)
+        {
+            if (value == IntPtr.Zero) return "";
+            if ((int)value < 00401000) return "";
+            if (encoding == null)
+                encoding = Encoding.ASCII;
+            try
+            {
+                return MemoryService.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        internal static string ReadString(this int value, int length = 512, Encoding encoding = null)
+        {
+            if (value == 0) return "";
+            if (value < 00401000) return "";
+            if (encoding == null)
+                encoding = Encoding.ASCII;
+            try
+            {
+                return MemoryService.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
+        }
+
+        internal static string ReadString(this uint value, int length = 512, Encoding encoding = null)
+        {
+            if (value == 0) return "";
+            if ((int)value < 00401000) return "";
+            if (encoding == null)
+                encoding = Encoding.ASCII;
+            try
+            {
+                return MemoryService.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
     }
 }

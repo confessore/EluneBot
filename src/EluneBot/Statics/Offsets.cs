@@ -180,5 +180,24 @@ namespace EluneBot.Statics
             internal static IntPtr AbandonQuest = (IntPtr)0x5EAF40;
             internal static IntPtr GetGameObjectPosition = (IntPtr)0x005F9F50;
         }
+
+        internal static class PlayerObject
+        {
+            internal static IntPtr NameBase = (IntPtr)0xC0E230;
+            internal static int NameBaseNextGuid = 0xC;
+            internal static int PlayerNameOffset = 0x14;
+        }
+
+        internal static class Unit
+        {
+            internal static int PosX = 0x9B8;
+            internal static int PosY = 0x9BC;
+            internal static int PosZ = 0x9C0;
+            internal static int AuraBase = 0xBC;
+            internal static int DebuffBase = 0x13C;
+
+            internal static int NameBase = 0xB30;
+            internal static int IsCritterOffset = 24;
+        }
     }
 }
