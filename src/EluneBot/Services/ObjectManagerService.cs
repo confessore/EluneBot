@@ -71,7 +71,6 @@ namespace EluneBot.Services
                 if (guid != 0)
                 {
                     var playerPointer = await memory.GetPointerForGuidAsync(guid);
-                    var tmp = await memory.GetPointerForGuidAsync(185586967084269567);
                     if (playerPointer != IntPtr.Zero)
                     {
                         if (LocalPlayer == null || LocalPlayer.Pointer != playerPointer)

@@ -45,7 +45,7 @@ namespace TestBase
                 while (true)
                 {
                     foreach (var unit in objectManager.Units)
-                        await logger.GeneralLog(unit.MaxHealth);
+                        await logger.GeneralLog(unit.Guid.ToString());
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100);
                 }
