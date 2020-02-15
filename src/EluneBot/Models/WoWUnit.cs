@@ -10,7 +10,7 @@ namespace EluneBot.Models
         public WoWUnit(ulong guid, IntPtr pointer, WoWObjectType type)
             : base(guid, pointer, type) { }
 
-        /*public override string Name
+        public override string Name
         {
             get
             {
@@ -56,7 +56,7 @@ namespace EluneBot.Models
                 var ptr2 = ptr1.ReadAs<IntPtr>();
                 return ptr2.ReadString();
             }
-        }*/
+        }
 
         public int Health =>
             GetDescriptor<int>(Offsets.Descriptors.Health);
