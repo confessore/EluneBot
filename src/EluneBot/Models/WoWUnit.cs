@@ -1,5 +1,6 @@
 ﻿using EluneBot.Enums;
 using EluneBot.Extensions;
+using EluneBot.Services;
 using EluneBot.Statics;
 using System;
 
@@ -70,5 +71,19 @@ namespace EluneBot.Models
         public int MaxMana =>
             GetDescriptor<int>(Offsets.Descriptors.MaxMana);
 
+        public override Location Position
+        {
+            get
+            {
+                try
+                {
+                    var x = ReadRelative<float>(Offsets.Unit.PosX);
+                    var y = ReadRelative<float>(Offsets.Unit.PosY);
+                    var z = ReadRelative<float>(Offsets.Unit.PosZ);
+                    return new Location(x, y, z);
+                }
+                catch { return new Location(0, 0, 0); }
+            }
+        }
     }
 }

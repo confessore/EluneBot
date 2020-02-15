@@ -1,4 +1,5 @@
 ﻿using EluneBot.Structs;
+using System;
 
 namespace EluneBot.Models
 {
@@ -14,5 +15,14 @@ namespace EluneBot.Models
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
+
+        public float DistanceTo(Location location)
+        {
+            var deltaX = X - location.X;
+            var deltaY = Y - location.Y;
+            var deltaZ = Z - location.Z;
+            return (float)Math.Sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+        }
+            
     }
 }
