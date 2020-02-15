@@ -12,8 +12,12 @@ namespace EluneBot.Services
 {
     public sealed class MemoryService : IMemoryService
     {
-        public static ProcessSharp ProcessSharp =>
-            new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local);
+        public MemoryService()
+        {
+            ProcessSharp = new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local);
+        }
+
+        public static ProcessSharp ProcessSharp;
 
         /// <summary>
         /// checks to see if the player is logged into the game world
