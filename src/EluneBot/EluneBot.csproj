@@ -111,6 +111,8 @@
     <Compile Include="Extensions\LocationExtensions.cs" />
     <Compile Include="Extensions\MemoryExtensions.cs" />
     <Compile Include="Models\LocalPet.cs" />
+    <Compile Include="Services\EndSceneService.cs" />
+    <Compile Include="Services\Interfaces\IEndSceneService.cs" />
     <Compile Include="Services\Interfaces\IObjectManagerService.cs" />
     <Compile Include="Models\WoWGameObject.cs" />
     <Compile Include="Models\WoWItem.cs" />

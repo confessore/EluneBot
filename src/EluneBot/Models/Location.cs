@@ -23,6 +23,5 @@ namespace EluneBot.Models
             var deltaZ = Z - location.Z;
             return (float)Math.Sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
         }
-            
     }
 }

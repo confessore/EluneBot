@@ -6,8 +6,6 @@ using EluneBot.Utilities;
 using EluneBot.Utilities.Interfaces;
 using EluneBot.ViewModels.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
-using Process.NET;
-using Process.NET.Memory;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
@@ -22,16 +20,18 @@ namespace EluneBot.ViewModels
 {
     internal class MainViewModel : BaseViewModel
     {
-        readonly ILoggerService loggingService;
+        readonly ILoggerService logger;
         readonly IObjectManagerService objectManager;
-        readonly IMemoryService memoryService;
+        readonly IMemoryService memory;
+        readonly IEndSceneService endScene;
 
         public MainViewModel()
         {
             Services = ConfigureServicesAsync().GetAwaiter().GetResult();
-            loggingService = Services.GetRequiredService<ILoggerService>();
+            logger = Services.GetRequiredService<ILoggerService>();
             objectManager = Services.GetRequiredService<IObjectManagerService>();
-            memoryService = Services.GetRequiredService<IMemoryService>();
+            memory = Services.GetRequiredService<IMemoryService>();
+            endScene = Services.GetRequiredService<IEndSceneService>();
             ReloadBasesAsync();
             ReloadBasesAsyncCommand = new AsyncCommand(ReloadBasesAsync);
             StartBaseAsyncCommand = new AsyncCommand(StartBaseAsync, CanStartBase);
@@ -104,9 +104,9 @@ namespace EluneBot.ViewModels
                 catalog.Catalogs.Add(new AssemblyCatalog(Assembly.Load(File.ReadAllBytes(file))));
             }
             var container = new CompositionContainer(catalog);
-            container.ComposeExportedValue(loggingService);
+            container.ComposeExportedValue(logger);
             container.ComposeExportedValue(objectManager);
-            container.ComposeExportedValue(memoryService);
+            container.ComposeExportedValue(memory);
             container.ComposeParts(this);
             if (AvailableBases.Count > 0)
                 SelectedBase = AvailableBases[0];
@@ -118,7 +118,7 @@ namespace EluneBot.ViewModels
 
         async Task StartBaseAsync()
         {
-            if (await memoryService.IsInGameAsync())
+            if (await memory.IsInGameAsync())
             {
                 Running = true;
                 SelectedBase.Start();
@@ -151,6 +151,7 @@ namespace EluneBot.ViewModels
                 .AddSingleton<ILoggerService, LoggerService>()
                 .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IMemoryService, MemoryService>()
+                .AddSingleton<IEndSceneService, EndSceneService>()
                 .BuildServiceProvider());
         }
     }
