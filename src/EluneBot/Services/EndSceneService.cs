@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EluneBot.Services
 {
-    public sealed class EndSceneService : IEndSceneService
+    internal sealed class EndSceneService : IEndSceneService
     {
         public EndSceneService()
         {

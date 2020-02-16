@@ -2,6 +2,7 @@
 using EluneBot.Services.Interfaces;
 using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,14 +13,17 @@ namespace TestBase
     {
         readonly ILoggerService logger;
         readonly IObjectManagerService objectManager;
+        readonly IMemoryService memory;
 
         [ImportingConstructor]
         public TestBase(
             [Import]ILoggerService logger,
-            [Import]IObjectManagerService objectManager)
+            [Import]IObjectManagerService objectManager,
+            [Import]IMemoryService memory)
         {
             this.logger = logger;
             this.objectManager = objectManager;
+            this.memory = memory;
         }
 
         CancellationTokenSource cts;
@@ -44,8 +48,9 @@ namespace TestBase
             {
                 while (true)
                 {
-                    foreach (var unit in objectManager.Units)
-                        await logger.GeneralLog(unit.Name);
+                    //foreach (var unit in objectManager.Units)
+                        //await logger.GeneralLog(unit.Position.DistanceTo(objectManager.LocalPlayer.Position).ToString());
+                    await memory.ClickToMoveAsync(objectManager.Units.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position);
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100);
                 }

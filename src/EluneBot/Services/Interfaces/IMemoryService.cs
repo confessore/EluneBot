@@ -15,6 +15,7 @@ namespace EluneBot.Services.Interfaces
         Task UseAtPositionAsync(string spell, Location location, int rank = -1);
         Task<IntPtr> GetPointerForGuidAsync(ulong guid);
         Task<WoWObjectType> GetWoWObjectTypeAsync(IntPtr pointer);
+        Task ClickToMoveAsync(Location position);
         Task EnumerateVisibleObjects(IntPtr callback, int filter);
     }
 }

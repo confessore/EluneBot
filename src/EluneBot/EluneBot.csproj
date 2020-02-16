@@ -106,6 +106,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Enums\ClickType.cs" />
     <Compile Include="Enums\WoWClass.cs" />
     <Compile Include="Enums\WoWObjectType.cs" />
     <Compile Include="Extensions\LocationExtensions.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Models\WoWGameObject.cs" />
     <Compile Include="Models\WoWItem.cs" />
     <Compile Include="Models\WoWObject.cs" />
+    <Compile Include="Services\Interfaces\IPatchService.cs" />
     <Compile Include="Services\ObjectManagerService.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Interfaces\IClass.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Services\Interfaces\IMemoryService.cs" />
     <Compile Include="Services\LoggerService.cs" />
     <Compile Include="Services\MemoryService.cs" />
+    <Compile Include="Services\PatchService.cs" />
     <Compile Include="Statics\Offsets.cs" />
     <Compile Include="Statics\Functions.cs" />
     <Compile Include="Statics\Paths.cs" />

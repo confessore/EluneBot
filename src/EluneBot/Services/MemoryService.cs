@@ -89,6 +89,18 @@ namespace EluneBot.Services
             Task.FromResult((WoWObjectType)ProcessSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
 
         /// <summary>
+        /// clicks to move the player
+        /// </summary>
+        /// <param name="position"></param>
+        /// <returns></returns>
+        public async Task ClickToMoveAsync(Location position)
+        {
+            var guid = (ulong)0;
+            var xyz = position.ToStruct();
+            Functions.ClickToMove(await GetPointerForGuidAsync(await GetLocalPlayerGuidAsync()), (uint)ClickType.Move, ref guid, ref xyz, 2);
+        }
+
+        /// <summary>
         /// enumerates all visible objects around the player
         /// </summary>
         /// <param name="callback"></param>

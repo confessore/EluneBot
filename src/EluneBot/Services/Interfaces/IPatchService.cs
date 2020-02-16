@@ -1,6 +1,6 @@
 ﻿namespace EluneBot.Services.Interfaces
 {
-    internal interface IEndSceneService
+    internal interface IPatchService
     {
     }
 }

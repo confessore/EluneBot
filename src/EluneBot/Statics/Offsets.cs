@@ -181,6 +181,19 @@ namespace EluneBot.Statics
             internal static IntPtr GetGameObjectPosition = (IntPtr)0x005F9F50;
         }
 
+        internal static class Patches
+        {
+            internal static IntPtr DisableCollision1 = (IntPtr)0x6ABC5A;
+            //internal static IntPtr DisableCollision2 = (IntPtr) 0x006A467B;
+            internal static IntPtr DisableCollision3 = (IntPtr)0x006ABF13; // GameObject Collision
+            //internal static IntPtr DisableCollision4 = (IntPtr) 0x006AB494;
+            internal static IntPtr CtmPatch = (IntPtr)0x860A90;
+            internal static IntPtr Wallclimb = (IntPtr)0x0080DFFC;
+            internal static IntPtr LootPatch = (IntPtr)0x004C21C0;
+            internal static IntPtr LootPatch2 = (IntPtr)0x004C28FF;
+            internal static IntPtr LuaUnlock = (IntPtr)0x494A50;
+        }
+
         internal static class PlayerObject
         {
             internal static IntPtr NameBase = (IntPtr)0xC0E230;

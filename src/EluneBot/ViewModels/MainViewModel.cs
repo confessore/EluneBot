@@ -24,6 +24,7 @@ namespace EluneBot.ViewModels
         readonly IObjectManagerService objectManager;
         readonly IMemoryService memory;
         readonly IEndSceneService endScene;
+        readonly IPatchService patch;
 
         public MainViewModel()
         {
@@ -32,6 +33,7 @@ namespace EluneBot.ViewModels
             objectManager = Services.GetRequiredService<IObjectManagerService>();
             memory = Services.GetRequiredService<IMemoryService>();
             endScene = Services.GetRequiredService<IEndSceneService>();
+            patch = Services.GetRequiredService<IPatchService>();
             ReloadBasesAsync();
             ReloadBasesAsyncCommand = new AsyncCommand(ReloadBasesAsync);
             StartBaseAsyncCommand = new AsyncCommand(StartBaseAsync, CanStartBase);
@@ -152,6 +154,7 @@ namespace EluneBot.ViewModels
                 .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IMemoryService, MemoryService>()
                 .AddSingleton<IEndSceneService, EndSceneService>()
+                .AddSingleton<IPatchService, PatchService>()
                 .BuildServiceProvider());
         }
     }
