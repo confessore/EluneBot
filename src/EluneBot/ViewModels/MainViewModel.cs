@@ -21,8 +21,8 @@ namespace EluneBot.ViewModels
     internal class MainViewModel : BaseViewModel
     {
         readonly ILoggerService logger;
-        readonly IObjectManagerService objectManager;
         readonly IMemoryService memory;
+        readonly IObjectManagerService objectManager;
         readonly IEndSceneService endScene;
         readonly IPatchService patch;
 
@@ -30,8 +30,8 @@ namespace EluneBot.ViewModels
         {
             Services = ConfigureServicesAsync().GetAwaiter().GetResult();
             logger = Services.GetRequiredService<ILoggerService>();
-            objectManager = Services.GetRequiredService<IObjectManagerService>();
             memory = Services.GetRequiredService<IMemoryService>();
+            objectManager = Services.GetRequiredService<IObjectManagerService>();
             endScene = Services.GetRequiredService<IEndSceneService>();
             patch = Services.GetRequiredService<IPatchService>();
             ReloadBasesAsync();
@@ -151,8 +151,8 @@ namespace EluneBot.ViewModels
             return Task.FromResult<IServiceProvider>(
                 new ServiceCollection()
                 .AddSingleton<ILoggerService, LoggerService>()
-                .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IMemoryService, MemoryService>()
+                .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IEndSceneService, EndSceneService>()
                 .AddSingleton<IPatchService, PatchService>()
                 .BuildServiceProvider());

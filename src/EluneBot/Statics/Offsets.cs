@@ -157,9 +157,9 @@ namespace EluneBot.Statics
 
             internal static IntPtr DefaultServerLogin = (IntPtr)0x0046D160;
 
-            internal static IntPtr IsSceneEnd = (IntPtr)0x005A17A0;
-            internal static IntPtr EndScenePtr1 = (IntPtr)0x38a8;
-            internal static IntPtr EndScenePtr2 = (IntPtr)0xa8;
+            internal static IntPtr ISceneEnd = (IntPtr)0x005A17A0;
+            internal static IntPtr EndScenePtr1 = (IntPtr)0x38A8;
+            internal static IntPtr EndScenePtr2 = (IntPtr)0xA8;
 
             internal static IntPtr ItemCacheGetRow = (IntPtr)0x0055BA30;
             internal static IntPtr ItemCacheBasePtr = (IntPtr)0x00C0E2A0;

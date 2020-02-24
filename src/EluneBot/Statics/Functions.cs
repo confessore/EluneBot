@@ -29,7 +29,6 @@ namespace EluneBot.Statics
         public static void ClickToMove(IntPtr playerPtr, uint clickType, ref ulong interactGuidPtr, ref XYZ position, float precision) =>
             Marshal.GetDelegateForFunctionPointer<ClickToMoveDelegate>(Offsets.Functions.ClickToMove).Invoke(playerPtr, clickType, ref interactGuidPtr, ref position, precision);
 
-
         [DllImport(Strings.FastCall, EntryPoint = "EnumerateVisibleObjects")]
         public static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr ptr);
 
