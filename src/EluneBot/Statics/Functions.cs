@@ -30,7 +30,10 @@ namespace EluneBot.Statics
             Marshal.GetDelegateForFunctionPointer<ClickToMoveDelegate>(Offsets.Functions.ClickToMove).Invoke(playerPtr, clickType, ref interactGuidPtr, ref position, precision);
 
         [DllImport(Strings.FastCall, EntryPoint = "EnumerateVisibleObjects")]
-        public static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr ptr);
+        public static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr pointer);
+
+        /*[DllImport(Strings.FastCall, EntryPoint = "DoString")]
+        public static extern void DoString(string luaCode, IntPtr pointer);*/
 
     }
 }

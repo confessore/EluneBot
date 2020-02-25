@@ -110,5 +110,11 @@ namespace EluneBot.Services
             Functions.EnumerateVisibleObjects(callback, filter, Offsets.Functions.EnumerateVisibleObjects);
             return Task.CompletedTask;
         }
+
+        /*public Task DoString(string luaCode)
+        {
+            Functions.DoString(luaCode, Offsets.Functions.DoString);
+            return Task.CompletedTask;
+        }*/
     }
 }

@@ -49,8 +49,8 @@ namespace TestBase
                 while (true)
                 {
                     //foreach (var unit in objectManager.Units)
-                        //await logger.GeneralLog(unit.Position.DistanceTo(objectManager.LocalPlayer.Position).ToString());
-                    await memory.ClickToMoveAsync(objectManager.Units.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position);
+                    //await logger.GeneralLog(unit.Position.DistanceTo(objectManager.LocalPlayer.Position).ToString());
+                    //await memory.ClickToMoveAsync(objectManager.Units.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position);
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100);
                 }
