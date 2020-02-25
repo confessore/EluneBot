@@ -36,15 +36,14 @@ namespace EluneBot
             try
             {
                 if (await InjectedAsync)
-                {
                     new MainView().Show();
-                }
                 else
                 {
                     await CheckFilesAndFoldersAsync();
                     await CheckWoWPathAsync();
                     await ExecuteAsAdministratorAsync(out var process);
                     Inject(process.Id, Paths.Loader);
+                    Environment.Exit(0);
                 }
             }
             catch (Exception e)
