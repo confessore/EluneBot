@@ -3,7 +3,6 @@ using EluneBot.Extensions;
 using EluneBot.Models;
 using EluneBot.Services.Interfaces;
 using EluneBot.Statics;
-using Process.NET;
 using System;
 using System.Collections.Generic;
 using System.Linq;

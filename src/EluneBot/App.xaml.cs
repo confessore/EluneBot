@@ -36,7 +36,11 @@ namespace EluneBot
             try
             {
                 if (await InjectedAsync)
-                    new MainView().Show();
+                {
+                    var mainView = new MainView();
+                    mainView.Closed += (sender, args) => { Environment.Exit(0); };
+                    mainView.Show();
+                }
                 else
                 {
                     await CheckFilesAndFoldersAsync();
