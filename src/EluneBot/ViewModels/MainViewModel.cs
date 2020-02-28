@@ -22,6 +22,7 @@ namespace EluneBot.ViewModels
     {
         readonly ILoggerService logger;
         readonly IMemoryService memory;
+        readonly INavigationService navigation; 
         readonly IObjectManagerService objectManager;
         readonly IEndSceneService endScene;
         readonly IPatchService patch;
@@ -31,6 +32,7 @@ namespace EluneBot.ViewModels
             Services = ConfigureServicesAsync().GetAwaiter().GetResult();
             logger = Services.GetRequiredService<ILoggerService>();
             memory = Services.GetRequiredService<IMemoryService>();
+            navigation = Services.GetRequiredService<INavigationService>();
             objectManager = Services.GetRequiredService<IObjectManagerService>();
             endScene = Services.GetRequiredService<IEndSceneService>();
             patch = Services.GetRequiredService<IPatchService>();
@@ -107,8 +109,9 @@ namespace EluneBot.ViewModels
             }
             var container = new CompositionContainer(catalog);
             container.ComposeExportedValue(logger);
-            container.ComposeExportedValue(objectManager);
             container.ComposeExportedValue(memory);
+            container.ComposeExportedValue(navigation);
+            container.ComposeExportedValue(objectManager);
             container.ComposeParts(this);
             if (AvailableBases.Count > 0)
                 SelectedBase = AvailableBases[0];
@@ -152,6 +155,7 @@ namespace EluneBot.ViewModels
                 new ServiceCollection()
                 .AddSingleton<ILoggerService, LoggerService>()
                 .AddSingleton<IMemoryService, MemoryService>()
+                .AddSingleton<INavigationService, NavigationService>()
                 .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IEndSceneService, EndSceneService>()
                 .AddSingleton<IPatchService, PatchService>()

@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{9584E5FC-4095-45BA-AA15-D21B3BD3250D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>KrycessBotFastCall</RootNamespace>
+    <RootNamespace>EluneBotFastCall</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>EluneBot.FastCall</ProjectName>
   </PropertyGroup>
@@ -94,7 +94,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;KRYCESSBOTFASTCALL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <LanguageStandard>Default</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,6 +127,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;KRYCESSBOTFASTCALL_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

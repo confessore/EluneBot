@@ -15,6 +15,7 @@ namespace EluneBot.Statics
         public const string FastCall = "EluneBot.FastCall.dll";
         public const string Injector = "EluneBot.Injector.dll";
         public const string Loader = "EluneBot.Loader.dll";
+        public const string Navigation = "EluneBot.Navigation.dll";
 
         public const string Bases = "Bases";
         public const string Logs = "Logs";

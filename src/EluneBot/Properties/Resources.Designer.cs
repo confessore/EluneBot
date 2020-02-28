@@ -93,6 +93,16 @@ namespace EluneBot.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] EluneBot_Navigation {
+            get {
+                object obj = ResourceManager.GetObject("EluneBot_Navigation", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Settings {
             get {
                 object obj = ResourceManager.GetObject("Settings", resourceCulture);

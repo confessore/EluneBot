@@ -78,7 +78,7 @@ namespace EluneBot.Services
                 }
                 foreach (var @object in Objects.Values)
                     @object.CanRemove = true;
-                await memory.EnumerateVisibleObjects(enumerateVisibleObjectsCallbackPointer, -1);
+                await memory.EnumerateVisibleObjectsAsync(enumerateVisibleObjectsCallbackPointer, -1);
                 foreach (var kvp in Objects.Where(p => p.Value.CanRemove).ToList())
                     Objects.Remove(kvp.Key);
                 FinalObjects = Objects.Values.ToList();

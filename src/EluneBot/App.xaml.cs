@@ -62,6 +62,7 @@ namespace EluneBot
             Paths.FastCall.CheckFile(EluneBot.Properties.Resources.EluneBot_FastCall);
             Paths.Injector.CheckFile(EluneBot.Properties.Resources.EluneBot_Injector);
             Paths.Loader.CheckFile(EluneBot.Properties.Resources.EluneBot_Loader);
+            Paths.Navigation.CheckFile(EluneBot.Properties.Resources.EluneBot_Navigation);
             Paths.Bases.CheckDirectory();
             Paths.Logs.CheckDirectory();
             Paths.Plugins.CheckDirectory();

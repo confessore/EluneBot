@@ -105,16 +105,16 @@ namespace EluneBot.Services
         /// </summary>
         /// <param name="callback"></param>
         /// <param name="filter"></param>
-        public Task EnumerateVisibleObjects(IntPtr callback, int filter)
+        public Task EnumerateVisibleObjectsAsync(IntPtr callback, int filter)
         {
             Functions.EnumerateVisibleObjects(callback, filter, Offsets.Functions.EnumerateVisibleObjects);
             return Task.CompletedTask;
         }
 
-        /*public Task DoString(string luaCode)
+        public Task DoStringAsync(string luaCode)
         {
             Functions.DoString(luaCode, Offsets.Functions.DoString);
             return Task.CompletedTask;
-        }*/
+        }
     }
 }

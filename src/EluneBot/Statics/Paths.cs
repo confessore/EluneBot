@@ -14,6 +14,7 @@ namespace EluneBot.Statics
         public static string FastCall = $"{Assembly.JumpUp(1)}\\{Strings.FastCall}";
         public static string Injector = $"{Assembly.JumpUp(1)}\\{Strings.Injector}";
         public static string Loader = $"{Assembly.JumpUp(1)}\\{Strings.Loader}";
+        public static string Navigation = $"{Assembly.JumpUp(1)}\\{Strings.Navigation}";
 
         public static string Bases = $"{Assembly.JumpUp(1)}\\{Strings.Bases}";
         public static string Logs = $"{Assembly.JumpUp(1)}\\{Strings.Logs}";

@@ -32,8 +32,8 @@ namespace EluneBot.Statics
         [DllImport(Strings.FastCall, EntryPoint = "EnumerateVisibleObjects")]
         public static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr pointer);
 
-        /*[DllImport(Strings.FastCall, EntryPoint = "DoString")]
-        public static extern void DoString(string luaCode, IntPtr pointer);*/
+        [DllImport(Strings.FastCall, EntryPoint = "DoString")]
+        public static extern void DoString(string luaCode, IntPtr pointer);
 
     }
 }

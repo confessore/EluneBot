@@ -12,6 +12,13 @@ namespace EluneBot.Models
             Z = z;
         }
 
+        public Location(XYZ xyz)
+        {
+            X = xyz.X;
+            Y = xyz.Y;
+            Z = xyz.Z;
+        }
+
         public float X { get; set; }
         public float Y { get; set; }
         public float Z { get; set; }
