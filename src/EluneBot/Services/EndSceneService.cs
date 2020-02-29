@@ -9,9 +9,11 @@ namespace EluneBot.Services
 {
     internal sealed class EndSceneService : IEndSceneService
     {
-        public EndSceneService()
+        readonly IMainThreadService mainThread;
+        public EndSceneService(IMainThreadService mainThread)
         {
-            //ThrottleFPS();
+            this.mainThread = mainThread;
+            ThrottleFPS();
         }
 
         int lastFrameTick;
@@ -28,12 +30,15 @@ namespace EluneBot.Services
         // this corrects an issue where ClickToMove doesn't work when your monitor has a refresh rate above ~80
         void ThrottleFPS()
         {
-            GetEndScenePtr();
-            endSceneOriginal = Marshal.GetDelegateForFunctionPointer<Direct3D9EndSceneDelegate>(MemoryService.ProcessSharp.Memory.Read<IntPtr>(endScenePtr));
-            var endSceneDetour = new Direct3D9EndSceneDelegate(EndSceneHook);
-            var addrToDetour = Marshal.GetFunctionPointerForDelegate(endSceneDetour);
-            var customBytes = BitConverter.GetBytes((int)addrToDetour);
-            MemoryService.ProcessSharp.Memory.Write(endScenePtr, customBytes);
+            mainThread.Invoke(() =>
+            {
+                GetEndScenePtr();
+                endSceneOriginal = Marshal.GetDelegateForFunctionPointer<Direct3D9EndSceneDelegate>(MemoryService.ProcessSharp.Memory.Read<IntPtr>(endScenePtr));
+                var endSceneDetour = new Direct3D9EndSceneDelegate(EndSceneHook);
+                var addrToDetour = Marshal.GetFunctionPointerForDelegate(endSceneDetour);
+                var customBytes = BitConverter.GetBytes((int)addrToDetour);
+                MemoryService.ProcessSharp.Memory.Write(endScenePtr, customBytes);
+            });
         }
 
         int EndSceneHook(IntPtr device)

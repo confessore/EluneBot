@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace EluneBot.Services
 {
-    unsafe class NavigationService : INavigationService
+    unsafe sealed class NavigationService : INavigationService
     {
         [DllImport("kernel32.dll")]
         static extern IntPtr LoadLibrary(string lpFileName);

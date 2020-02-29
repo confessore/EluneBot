@@ -114,12 +114,14 @@
     <Compile Include="Models\LocalPet.cs" />
     <Compile Include="Services\EndSceneService.cs" />
     <Compile Include="Services\Interfaces\IEndSceneService.cs" />
+    <Compile Include="Services\Interfaces\IMainThreadService.cs" />
     <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\IObjectManagerService.cs" />
     <Compile Include="Models\WoWGameObject.cs" />
     <Compile Include="Models\WoWItem.cs" />
     <Compile Include="Models\WoWObject.cs" />
     <Compile Include="Services\Interfaces\IPatchService.cs" />
+    <Compile Include="Services\MainThreadService.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ObjectManagerService.cs" />
     <Compile Include="Models\Location.cs" />
