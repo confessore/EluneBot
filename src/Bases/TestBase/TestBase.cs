@@ -53,10 +53,10 @@ namespace TestBase
                 {
                     //foreach (var unit in objectManager.Units)
                     //await logger.GeneralLog(unit.Position.DistanceTo(objectManager.LocalPlayer.Position).ToString());
-                    var path = navigation.CalculateLocation(objectManager.LocalPlayer.MapId, objectManager.LocalPlayer.Position, objectManager.NPCs.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position, true);
-                    await memory.ClickToMoveAsync(path[1]);
+                    //var path = navigation.CalculateLocation(objectManager.LocalPlayer.MapId, objectManager.LocalPlayer.Position, objectManager.NPCs.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position, true);
+                    //await memory.ClickToMoveAsync(path[1]);
                     //await memory.ClickToMoveAsync(objectManager.Units.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position);
-                    //await memory.DoStringAsync("DoEmote('sit')");
+                    await memory.DoStringAsync("DoEmote('sit')");
 
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100);

@@ -2,7 +2,7 @@
 
 namespace EluneBot.Services.Interfaces
 {
-    internal interface IMainThreadService
+    public interface IMainThreadService
     {
         T Invoke<T>(Func<T> @delegate);
 

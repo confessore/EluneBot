@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace EluneBot.Services
 {
-    internal sealed class MainThreadService : IMainThreadService
+    public sealed class MainThreadService : IMainThreadService
     {
         public MainThreadService()
         {
-            Task.Delay(10000).Wait();
             mtId = System.Diagnostics.Process.GetCurrentProcess().Threads[0].Id;
             EnumWindows(WindowProcess, IntPtr.Zero);
             newCallback = WndProc; // Pins WndProc - will not be garbage collected.

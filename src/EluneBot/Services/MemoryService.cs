@@ -12,8 +12,11 @@ namespace EluneBot.Services
 {
     public sealed class MemoryService : IMemoryService
     {
-        public MemoryService()
+        readonly IMainThreadService mainThread;
+
+        public MemoryService(IMainThreadService mainThread)
         {
+            this.mainThread = mainThread;
             ProcessSharp = new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local);
         }
 
@@ -113,7 +116,7 @@ namespace EluneBot.Services
 
         public Task DoStringAsync(string luaCode)
         {
-            Functions.DoString(luaCode, Offsets.Functions.DoString);
+            mainThread.Invoke(() => Functions.DoString(luaCode, Offsets.Functions.DoString));
             return Task.CompletedTask;
         }
     }
