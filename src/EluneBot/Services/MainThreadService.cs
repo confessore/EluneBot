@@ -1,10 +1,8 @@
 ﻿using EluneBot.Services.Interfaces;
-using Process.NET;
 using System;
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EluneBot.Services
 {
@@ -12,8 +10,6 @@ namespace EluneBot.Services
     {
         public MainThreadService()
         {
-            Task.Delay(10000).Wait();
-            ProcessSharp = new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), Process.NET.Memory.MemoryType.Local);
             mtId = System.Diagnostics.Process.GetCurrentProcess().Threads[0].Id;
             EnumWindows(WindowProcess, IntPtr.Zero);
             newCallback = WndProc; // Pins WndProc - will not be garbage collected.
@@ -21,7 +17,6 @@ namespace EluneBot.Services
                 Marshal.GetFunctionPointerForDelegate(newCallback));
         }
 
-        readonly ProcessSharp ProcessSharp;
 
         [DllImport("user32.dll")]
         static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
