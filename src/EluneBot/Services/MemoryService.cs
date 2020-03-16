@@ -105,7 +105,7 @@ namespace EluneBot.Services
         /// <param name="filter"></param>
         public Task EnumerateVisibleObjectsAsync(IntPtr callback, int filter)
         {
-            Functions.EnumerateVisibleObjects(callback, filter, Offsets.Functions.EnumerateVisibleObjects);
+            mainThread.Invoke(() => Functions.EnumerateVisibleObjects(callback, filter, Offsets.Functions.EnumerateVisibleObjects));
             return Task.CompletedTask;
         }
 
