@@ -9,11 +9,9 @@ namespace EluneBot.Services
 {
     internal sealed class EndSceneService : IEndSceneService
     {
-        readonly IMainThreadService mainThread;
         public EndSceneService(IMainThreadService mainThread)
         {
-            this.mainThread = mainThread;
-            ThrottleFPS();
+            //mainThread.Invoke(() => ThrottleFPS());
         }
 
         int lastFrameTick;
@@ -30,15 +28,12 @@ namespace EluneBot.Services
         // this corrects an issue where ClickToMove doesn't work when your monitor has a refresh rate above ~80
         void ThrottleFPS()
         {
-            mainThread.Invoke(() =>
-            {
-                GetEndScenePtr();
-                endSceneOriginal = Marshal.GetDelegateForFunctionPointer<Direct3D9EndSceneDelegate>(MemoryService.ProcessSharp.Memory.Read<IntPtr>(endScenePtr));
-                var endSceneDetour = new Direct3D9EndSceneDelegate(EndSceneHook);
-                var addrToDetour = Marshal.GetFunctionPointerForDelegate(endSceneDetour);
-                var customBytes = BitConverter.GetBytes((int)addrToDetour);
-                MemoryService.ProcessSharp.Memory.Write(endScenePtr, customBytes);
-            });
+            GetEndScenePtr();
+            endSceneOriginal = Marshal.GetDelegateForFunctionPointer<Direct3D9EndSceneDelegate>(App.ProcessSharp.Memory.Read<IntPtr>(endScenePtr));
+            var endSceneDetour = new Direct3D9EndSceneDelegate(EndSceneHook);
+            var addrToDetour = Marshal.GetFunctionPointerForDelegate(endSceneDetour);
+            var customBytes = BitConverter.GetBytes((int)addrToDetour);
+            App.ProcessSharp.Memory.Write(endScenePtr, customBytes);
         }
 
         int EndSceneHook(IntPtr device)
@@ -69,14 +64,14 @@ namespace EluneBot.Services
             var hook = Marshal.GetFunctionPointerForDelegate(new Direct3D9ISceneEndDelegate(ISceneEndHook));
             // note the original bytes so we can unhook ISceneEnd after finding endScenePtr
             original = new List<byte>();
-            original.AddRange(MemoryService.ProcessSharp.Memory.Read<byte>(target, 6));
+            original.AddRange(App.ProcessSharp.Memory.Read<byte>(target, 6));
 
             // hook ISceneEnd
             var detour = new List<byte> { 0x68 };
             var tmp = BitConverter.GetBytes(hook.ToInt32());
             detour.AddRange(tmp);
             detour.Add(0xC3);
-            MemoryService.ProcessSharp.Memory.Write(target, detour.ToArray());
+            App.ProcessSharp.Memory.Write(target, detour.ToArray());
 
             // wait for ISceneEndHook to set endScenePtr
             while (endScenePtr == default)
@@ -85,11 +80,11 @@ namespace EluneBot.Services
 
         IntPtr ISceneEndHook(IntPtr device)
         {
-            var ptr1 = MemoryService.ProcessSharp.Memory.Read<IntPtr>(IntPtr.Add(device, (int)Offsets.Functions.EndScenePtr1));
-            var ptr2 = MemoryService.ProcessSharp.Memory.Read<IntPtr>(ptr1);
+            var ptr1 = App.ProcessSharp.Memory.Read<IntPtr>(IntPtr.Add(device, (int)Offsets.Functions.EndScenePtr1));
+            var ptr2 = App.ProcessSharp.Memory.Read<IntPtr>(ptr1);
             endScenePtr = IntPtr.Add(ptr2, (int)Offsets.Functions.EndScenePtr2);
             // unhook ISceneEnd
-            MemoryService.ProcessSharp.Memory.Write(target, original.ToArray());
+            App.ProcessSharp.Memory.Write(target, original.ToArray());
             return iSceneEndDelegate(device);
         }
 

@@ -3,8 +3,6 @@ using EluneBot.Extensions;
 using EluneBot.Models;
 using EluneBot.Services.Interfaces;
 using EluneBot.Statics;
-using Process.NET;
-using Process.NET.Memory;
 using System;
 using System.Threading.Tasks;
 
@@ -17,24 +15,21 @@ namespace EluneBot.Services
         public MemoryService(IMainThreadService mainThread)
         {
             this.mainThread = mainThread;
-            ProcessSharp = new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local);
         }
-
-        public static ProcessSharp ProcessSharp;
 
         /// <summary>
         /// checks to see if the player is logged into the game world
         /// </summary>
         /// <returns>bool</returns>
         public Task<bool> IsInGameAsync() =>
-            Task.FromResult(ProcessSharp.Memory.Read<bool>(Offsets.LocalPlayer.IsInGame));
+            Task.FromResult(App.ProcessSharp.Memory.Read<bool>(Offsets.LocalPlayer.IsInGame));
 
         /// <summary>
         /// gets the player's character class
         /// </summary>
         /// <returns>WoWClass</returns>
         public Task<WoWClass> ClassAsync() =>
-            Task.FromResult((WoWClass)ProcessSharp.Memory.Read<byte>(Offsets.LocalPlayer.Class));
+            Task.FromResult((WoWClass)App.ProcessSharp.Memory.Read<byte>(Offsets.LocalPlayer.Class));
 
         /// <summary>
         /// gets the player's guid
@@ -89,7 +84,7 @@ namespace EluneBot.Services
         /// <param name="pointer"></param>
         /// <returns>Task<WoWObjectType></returns>
         public Task<WoWObjectType> GetWoWObjectTypeAsync(IntPtr pointer) =>
-            Task.FromResult((WoWObjectType)ProcessSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
+            Task.FromResult((WoWObjectType)App.ProcessSharp.Memory.Read<byte>(IntPtr.Add(pointer, (int)Offsets.ObjectManager.ObjType)));
 
         /// <summary>
         /// clicks to move the player

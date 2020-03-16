@@ -1,5 +1,4 @@
-﻿using EluneBot.Enums;
-using EluneBot.Structs;
+﻿using EluneBot.Structs;
 using System;
 using System.Runtime.InteropServices;
 
@@ -32,7 +31,7 @@ namespace EluneBot.Statics
         [DllImport(Strings.FastCall, EntryPoint = "EnumerateVisibleObjects")]
         public static extern void EnumerateVisibleObjects(IntPtr callback, int filter, IntPtr pointer);
 
-        [DllImport(Strings.FastCall, EntryPoint = "DoString")]
+        [DllImport(Strings.FastCall, EntryPoint = "DoString", CallingConvention = CallingConvention.StdCall)]
         public static extern void DoString(string luaCode, IntPtr pointer);
 
     }

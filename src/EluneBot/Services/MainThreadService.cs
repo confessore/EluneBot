@@ -1,4 +1,5 @@
 ﻿using EluneBot.Services.Interfaces;
+using Process.NET;
 using System;
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
@@ -11,12 +12,16 @@ namespace EluneBot.Services
     {
         public MainThreadService()
         {
+            Task.Delay(10000).Wait();
+            ProcessSharp = new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), Process.NET.Memory.MemoryType.Local);
             mtId = System.Diagnostics.Process.GetCurrentProcess().Threads[0].Id;
             EnumWindows(WindowProcess, IntPtr.Zero);
             newCallback = WndProc; // Pins WndProc - will not be garbage collected.
             oldCallback = SetWindowLong((IntPtr)hWnd, GWL_WNDPROC,
                 Marshal.GetFunctionPointerForDelegate(newCallback));
         }
+
+        readonly ProcessSharp ProcessSharp;
 
         [DllImport("user32.dll")]
         static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
@@ -62,9 +67,8 @@ namespace EluneBot.Services
 
         bool WindowProcess(IntPtr hWnd, IntPtr lParam)
         {
-            int procId;
-            GetWindowThreadProcessId(hWnd, out procId);
-            if (procId != mtId) return true;
+            GetWindowThreadProcessId(hWnd, out int procId);
+            if (procId != App.ProcessSharp.Native.Id) return true;
             if (!IsWindowVisible(hWnd)) return true;
             var length = GetWindowTextLength(hWnd);
             if (length == 0) return true;

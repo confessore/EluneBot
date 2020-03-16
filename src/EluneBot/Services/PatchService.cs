@@ -7,8 +7,8 @@ namespace EluneBot.Services
     {
         public PatchService()
         {
-            MemoryService.ProcessSharp.Memory.Write(Offsets.Patches.CtmPatch, new byte[] { 0x00, 0x00, 0x00, 0x00 });
-            MemoryService.ProcessSharp.Memory.Write(Offsets.Patches.LuaUnlock, new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 });
+            App.ProcessSharp.Memory.Write(Offsets.Patches.CtmPatch, new byte[] { 0x00, 0x00, 0x00, 0x00 });
+            App.ProcessSharp.Memory.Write(Offsets.Patches.LuaUnlock, new byte[] { 0xB8, 0x01, 0x00, 0x00, 0x00, 0xC3 });
         }
     }
 }

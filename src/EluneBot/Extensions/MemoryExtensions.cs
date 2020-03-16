@@ -18,32 +18,32 @@ namespace EluneBot.Extensions
 
         public static IntPtr PointsTo(this IntPtr value)
         {
-            return value == IntPtr.Zero ? IntPtr.Zero : MemoryService.ProcessSharp.Memory.Read<IntPtr>(value);
+            return value == IntPtr.Zero ? IntPtr.Zero : App.ProcessSharp.Memory.Read<IntPtr>(value);
         }
 
         internal static IntPtr PointsTo(this int value)
         {
-            return value == 0 ? IntPtr.Zero : MemoryService.ProcessSharp.Memory.Read<IntPtr>((IntPtr)value);
+            return value == 0 ? IntPtr.Zero : App.ProcessSharp.Memory.Read<IntPtr>((IntPtr)value);
         }
 
         internal static IntPtr PointsTo(this uint value)
         {
-            return value == 0 ? IntPtr.Zero : MemoryService.ProcessSharp.Memory.Read<IntPtr>((IntPtr)value);
+            return value == 0 ? IntPtr.Zero : App.ProcessSharp.Memory.Read<IntPtr>((IntPtr)value);
         }
 
         internal static T ReadAs<T>(this IntPtr value) where T : struct
         {
-            return value == IntPtr.Zero ? default : MemoryService.ProcessSharp.Memory.Read<T>(value);
+            return value == IntPtr.Zero ? default : App.ProcessSharp.Memory.Read<T>(value);
         }
 
         internal static T ReadAs<T>(this int value) where T : struct
         {
-            return value == 0 ? default : MemoryService.ProcessSharp.Memory.Read<T>((IntPtr)value);
+            return value == 0 ? default : App.ProcessSharp.Memory.Read<T>((IntPtr)value);
         }
 
         internal static T ReadAs<T>(this uint value) where T : struct
         {
-            return value == 0 ? default : MemoryService.ProcessSharp.Memory.Read<T>((IntPtr)value);
+            return value == 0 ? default : App.ProcessSharp.Memory.Read<T>((IntPtr)value);
         }
 
         internal static string ReadString(this IntPtr value, int length = 512, Encoding encoding = null)
@@ -54,7 +54,7 @@ namespace EluneBot.Extensions
                 encoding = Encoding.ASCII;
             try
             {
-                return MemoryService.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
+                return App.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
             }
             catch (Exception)
             {
@@ -70,7 +70,7 @@ namespace EluneBot.Extensions
                 encoding = Encoding.ASCII;
             try
             {
-                return MemoryService.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
+                return App.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
             }
             catch (Exception)
             {
@@ -86,7 +86,7 @@ namespace EluneBot.Extensions
                 encoding = Encoding.ASCII;
             try
             {
-                return MemoryService.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
+                return App.ProcessSharp.Memory.Read((IntPtr)value, encoding, length);
             }
             catch (Exception)
             {

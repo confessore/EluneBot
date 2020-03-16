@@ -11,6 +11,8 @@ using DialogResult = System.Windows.Forms.DialogResult;
 using Form = System.Windows.Forms.Form;
 using MessageBox = System.Windows.Forms.MessageBox;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using Process.NET;
+using Process.NET.Memory;
 
 namespace EluneBot
 {
@@ -19,6 +21,12 @@ namespace EluneBot
     /// </summary>
     internal partial class App : Application
     {
+        public App()
+        {
+            ProcessSharp = new ProcessSharp(System.Diagnostics.Process.GetCurrentProcess(), MemoryType.Local);
+        }
+        public static ProcessSharp ProcessSharp { get; set; }
+
         [DllImport(Strings.Injector, CallingConvention = CallingConvention.Cdecl)]
         static extern bool Inject(int pid, string dll);
 

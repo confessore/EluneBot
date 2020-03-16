@@ -23,11 +23,11 @@ namespace EluneBot.Models
 
         internal T GetDescriptor<T>(int descriptor) where T : struct
         {
-            var pointer = MemoryService.ProcessSharp.Memory.Read<uint>(IntPtr.Add(Pointer, Offsets.ObjectManager.DescriptorOffset));
-            return MemoryService.ProcessSharp.Memory.Read<T>(new IntPtr(pointer + descriptor));
+            var pointer = App.ProcessSharp.Memory.Read<uint>(IntPtr.Add(Pointer, Offsets.ObjectManager.DescriptorOffset));
+            return App.ProcessSharp.Memory.Read<T>(new IntPtr(pointer + descriptor));
         }
 
         internal T ReadRelative<T>(int offset) where T : struct =>
-            MemoryService.ProcessSharp.Memory.Read<T>(IntPtr.Add(Pointer, offset));
+            App.ProcessSharp.Memory.Read<T>(IntPtr.Add(Pointer, offset));
     }
 }

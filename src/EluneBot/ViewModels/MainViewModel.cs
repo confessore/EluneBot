@@ -13,7 +13,6 @@ using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace EluneBot.ViewModels
@@ -21,19 +20,19 @@ namespace EluneBot.ViewModels
     internal class MainViewModel : BaseViewModel
     {
         readonly ILoggerService logger;
-        readonly IMainThreadService mainThread;
         readonly IMemoryService memory;
-        readonly INavigationService navigation; 
+        readonly IMainThreadService mainThread;
+        readonly INavigationService navigation;
         readonly IObjectManagerService objectManager;
         readonly IEndSceneService endScene;
         readonly IPatchService patch;
 
         public MainViewModel()
         {
-            Services = ConfigureServicesAsync().GetAwaiter().GetResult();
+            Services = ConfigureServices();
             logger = Services.GetRequiredService<ILoggerService>();
-            mainThread = Services.GetRequiredService<IMainThreadService>();
             memory = Services.GetRequiredService<IMemoryService>();
+            mainThread = Services.GetRequiredService<IMainThreadService>();
             navigation = Services.GetRequiredService<INavigationService>();
             objectManager = Services.GetRequiredService<IObjectManagerService>();
             endScene = Services.GetRequiredService<IEndSceneService>();
@@ -151,18 +150,17 @@ namespace EluneBot.ViewModels
             return Task.CompletedTask;
         }
 
-        Task<IServiceProvider> ConfigureServicesAsync()
+        IServiceProvider ConfigureServices()
         {
-            return Task.FromResult<IServiceProvider>(
-                new ServiceCollection()
+            return new ServiceCollection()
                 .AddSingleton<ILoggerService, LoggerService>()
-                .AddSingleton<IMainThreadService, MainThreadService>()
                 .AddSingleton<IMemoryService, MemoryService>()
+                .AddSingleton<IMainThreadService, MainThreadService>()
                 .AddSingleton<INavigationService, NavigationService>()
                 .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IEndSceneService, EndSceneService>()
                 .AddSingleton<IPatchService, PatchService>()
-                .BuildServiceProvider());
+                .BuildServiceProvider();
         }
     }
 }

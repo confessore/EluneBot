@@ -56,7 +56,7 @@ namespace TestBase
                     //var path = navigation.CalculateLocation(objectManager.LocalPlayer.MapId, objectManager.LocalPlayer.Position, objectManager.NPCs.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position, true);
                     //await memory.ClickToMoveAsync(path[1]);
                     //await memory.ClickToMoveAsync(objectManager.Units.OrderBy(x => x.Position.DistanceTo(objectManager.LocalPlayer.Position)).FirstOrDefault().Position);
-                    await memory.DoStringAsync("DoEmote('sit')");
+                    await memory.DoStringAsync("Jump()");
 
                     token.ThrowIfCancellationRequested();
                     await Task.Delay(100);
