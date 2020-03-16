@@ -45,6 +45,7 @@ namespace EluneBot
             {
                 if (await InjectedAsync)
                 {
+                    await Task.Delay(5000);
                     var mainView = new MainView();
                     mainView.Closed += (sender, args) => { Environment.Exit(0); };
                     mainView.Show();

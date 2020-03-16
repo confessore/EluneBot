@@ -20,8 +20,8 @@ namespace EluneBot.ViewModels
     internal class MainViewModel : BaseViewModel
     {
         readonly ILoggerService logger;
-        readonly IMemoryService memory;
         readonly IMainThreadService mainThread;
+        readonly IMemoryService memory;
         readonly INavigationService navigation;
         readonly IObjectManagerService objectManager;
         readonly IEndSceneService endScene;
@@ -31,8 +31,8 @@ namespace EluneBot.ViewModels
         {
             Services = ConfigureServices();
             logger = Services.GetRequiredService<ILoggerService>();
-            memory = Services.GetRequiredService<IMemoryService>();
             mainThread = Services.GetRequiredService<IMainThreadService>();
+            memory = Services.GetRequiredService<IMemoryService>();
             navigation = Services.GetRequiredService<INavigationService>();
             objectManager = Services.GetRequiredService<IObjectManagerService>();
             endScene = Services.GetRequiredService<IEndSceneService>();
@@ -154,8 +154,8 @@ namespace EluneBot.ViewModels
         {
             return new ServiceCollection()
                 .AddSingleton<ILoggerService, LoggerService>()
-                .AddSingleton<IMemoryService, MemoryService>()
                 .AddSingleton<IMainThreadService, MainThreadService>()
+                .AddSingleton<IMemoryService, MemoryService>()
                 .AddSingleton<INavigationService, NavigationService>()
                 .AddSingleton<IObjectManagerService, ObjectManagerService>()
                 .AddSingleton<IEndSceneService, EndSceneService>()

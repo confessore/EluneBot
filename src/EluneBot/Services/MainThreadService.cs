@@ -17,7 +17,6 @@ namespace EluneBot.Services
                 Marshal.GetFunctionPointerForDelegate(newCallback));
         }
 
-
         [DllImport("user32.dll")]
         static extern bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
 
