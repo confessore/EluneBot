@@ -1,0 +1,43 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly fasmdll_managed, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class Fasm.ManagedFasm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(IntPtr): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Interfaces:
+    System.IDisposable
+  Properties:
+    System.Text.StringBuilder AssemblyString 'get ' : 
+  Methods:
+    AddLine(String, Object[]): PrivateScope, Public, HideBySig
+    AddLine(String): PrivateScope, Public, HideBySig
+    Add(String, Object[]): PrivateScope, Public, HideBySig
+    Add(String): PrivateScope, Public, HideBySig
+    InsertLine(String, Int32): PrivateScope, Public, HideBySig
+    Insert(String, Int32): PrivateScope, Public, HideBySig
+    Clear(): PrivateScope, Public, HideBySig
+    Assemble(String, Int32, Int32): PrivateScope, Public, Static, HideBySig
+    Assemble(String, Int32): PrivateScope, Public, Static, HideBySig
+    Assemble(String): PrivateScope, Public, Static, HideBySig
+    Assemble(ValueType): PrivateScope, Public, HideBySig
+    Assemble(): PrivateScope, Public, HideBySig
+    Inject(UInt32 IsLong): PrivateScope, Public, HideBySig
+    Inject(IntPtr, UInt32 IsLong): PrivateScope, Public, HideBySig
+    InjectAndExecute(UInt32 IsLong): PrivateScope, Public, HideBySig
+    InjectAndExecute(IntPtr, UInt32 IsLong): PrivateScope, Public, HideBySig
+    InjectAndExecute(IntPtr, UInt32 IsLong, UInt32 IsLong): PrivateScope, Public, HideBySig
+    InjectAndExecuteEx(UInt32 IsLong): PrivateScope, Public, HideBySig
+    InjectAndExecuteEx(IntPtr, UInt32 IsLong): PrivateScope, Public, HideBySig
+    InjectAndExecuteEx(IntPtr, UInt32 IsLong, UInt32 IsLong): PrivateScope, Public, HideBySig
+    GetProcessHandle(): PrivateScope, Public, HideBySig
+    SetProcessHandle(IntPtr): PrivateScope, Public, HideBySig
+    GetMemorySize(): PrivateScope, Public, HideBySig
+    SetMemorySize(Int32): PrivateScope, Public, HideBySig
+    GetPassLimit(): PrivateScope, Public, HideBySig
+    SetPassLimit(Int32): PrivateScope, Public, HideBySig
+    get_AssemblyString(): PrivateScope, Public, HideBySig, SpecialName
+    Dispose(): PrivateScope, Public, Final, Virtual, HideBySig
